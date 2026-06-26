@@ -138,65 +138,104 @@ async function startServer() {
         } else if (room.auctionType === 'draft') {
           room.status = 'active';
           const numTeams = Math.max(1, Object.keys(room.teams).length);
-          console.log(`Initializing draft mode for ${numTeams} teams`);
-          const batchedPlayers: Player[] = [];
-          const roles: Player['role'][] = [
-            'Top Order', 'Middle Order', 'Wicket-keeper', 'Finisher', 
-            'All-rounder', 'Pacer', 'Spinner', 'Top Order', 
-            'Middle Order', 'Pacer', 'Spinner', 'All-rounder',
-            'Finisher', 'Top Order', 'Pacer' // 15 rounds default
-          ];
-          
-          const playersByRole: Record<string, Player[]> = {};
-          [
-            'Top Order', 'Middle Order', 'Wicket-keeper', 'Finisher', 
-            'All-rounder', 'Pacer', 'Spinner'
-          ].forEach(role => {
-            playersByRole[role] = shuffleArray([...PLAYERS].filter(p => p.role === role));
-          });
-
           const draftLimit = room.draftLimit || 15;
-          console.log(`Draft limit: ${draftLimit} rounds`);
+          console.log(`Initializing draft mode for ${numTeams} teams, ${draftLimit} rounds`);
 
-          // Fill rounds based on draftLimit
-          for (let i = 0; i < draftLimit; i++) {
-            const role = roles[i % roles.length];
-            const rolePool = playersByRole[role];
-            
-            if (rolePool && rolePool.length >= numTeams) {
-              const batch = rolePool.splice(0, numTeams);
-              batchedPlayers.push(...batch);
-            } else {
-              // Fallback 1: find any role that has enough players
-              const alternativeRole = Object.keys(playersByRole).find(r => playersByRole[r].length >= numTeams);
-              if (alternativeRole) {
-                const batch = playersByRole[alternativeRole].splice(0, numTeams);
-                batchedPlayers.push(...batch);
+          // --- Phase Allocation (explicit design table, limits 5–20) ---
+          const PHASE_TABLE: Record<number, { wk: number; bat: number; ar: number; bowl: number }> = {
+            5:  { wk: 1, bat: 2, ar: 1, bowl: 1 },
+            6:  { wk: 1, bat: 2, ar: 1, bowl: 2 },
+            7:  { wk: 1, bat: 2, ar: 1, bowl: 3 },
+            8:  { wk: 1, bat: 3, ar: 1, bowl: 3 },
+            9:  { wk: 1, bat: 3, ar: 2, bowl: 3 },
+            10: { wk: 1, bat: 3, ar: 2, bowl: 4 },
+            11: { wk: 1, bat: 4, ar: 2, bowl: 4 },
+            12: { wk: 1, bat: 4, ar: 2, bowl: 5 },
+            13: { wk: 1, bat: 5, ar: 2, bowl: 5 },
+            14: { wk: 1, bat: 5, ar: 3, bowl: 5 },
+            15: { wk: 1, bat: 5, ar: 3, bowl: 6 },
+            16: { wk: 1, bat: 6, ar: 3, bowl: 6 },
+            17: { wk: 1, bat: 6, ar: 3, bowl: 7 },
+            18: { wk: 1, bat: 6, ar: 4, bowl: 7 },
+            19: { wk: 1, bat: 7, ar: 4, bowl: 7 },
+            20: { wk: 2, bat: 7, ar: 4, bowl: 7 },
+          };
+          // Clamp to supported range and look up composition
+          const clampedLimit = Math.max(5, Math.min(20, draftLimit));
+          const phases = PHASE_TABLE[clampedLimit];
+          const wkRounds   = phases.wk;
+          const batRounds  = phases.bat;
+          const arRounds   = phases.ar;
+          const bowlRounds = phases.bowl;
+
+          // --- Build Role Pools (freshly shuffled each draft) ---
+          const wkPool  = shuffleArray([...PLAYERS].filter(p => p.draftCategory === 'Wicketkeeper'));
+          const batPool = shuffleArray([...PLAYERS].filter(p => p.draftCategory === 'Batter'));
+          const arPool  = shuffleArray([...PLAYERS].filter(p => p.draftCategory === 'All-rounder'));
+          const bowlPool = shuffleArray([...PLAYERS].filter(p => p.draftCategory === 'Bowler'));
+
+          const usedIds = new Set<string>();
+
+          // Try to pick numTeams players from a pool; returns null if pool is exhausted
+          const tryPick = (pool: Player[]): Player[] | null => {
+            const available = pool.filter(p => !usedIds.has(p.id));
+            if (available.length < numTeams) return null;
+            const picked = shuffleArray(available).slice(0, numTeams);
+            picked.forEach(p => usedIds.add(p.id));
+            return picked;
+          };
+
+          // Flexible fallback: draw from all remaining unsold players
+          const flexPick = (): Player[] => {
+            const allRemaining = shuffleArray(
+              [...wkPool, ...batPool, ...arPool, ...bowlPool].filter(p => !usedIds.has(p.id))
+            );
+            const picked = allRemaining.slice(0, numTeams);
+            picked.forEach(p => usedIds.add(p.id));
+            return picked;
+          };
+
+          const batchedPlayers: Player[] = [];
+          const roundPhases: string[] = [];
+
+          const phaseConfig = [
+            { name: 'Wicketkeepers', count: wkRounds,   pool: wkPool   },
+            { name: 'Batters',       count: batRounds,  pool: batPool  },
+            { name: 'All-rounders',  count: arRounds,   pool: arPool   },
+            { name: 'Bowlers',       count: bowlRounds, pool: bowlPool },
+          ];
+
+          for (const phase of phaseConfig) {
+            for (let r = 0; r < phase.count; r++) {
+              const picked = tryPick(phase.pool);
+              if (picked) {
+                batchedPlayers.push(...picked);
+                roundPhases.push(phase.name);
               } else {
-                // Fallback 2: Just take any remaining players from all pools combined
-                const allRemaining = shuffleArray(Object.values(playersByRole).flat());
-                if (allRemaining.length >= numTeams) {
-                  const batch = allRemaining.slice(0, numTeams);
-                  batchedPlayers.push(...batch);
-                  // Remove these players from their respective pools
-                  batch.forEach(p => {
-                    const pool = playersByRole[p.role];
-                    const idx = pool.findIndex(rp => rp.id === p.id);
-                    if (idx !== -1) pool.splice(idx, 1);
-                  });
+                // Phase pool exhausted — convert remaining rounds of this phase to Flexible
+                const flex = flexPick();
+                if (flex.length === numTeams) {
+                  batchedPlayers.push(...flex);
+                  roundPhases.push('Flexible');
                 }
+                // If not even flexible picks exist, skip the round silently
               }
             }
           }
-          
-          console.log(`Batched ${batchedPlayers.length} players for draft`);
+
+          const actualRounds = roundPhases.length;
+          console.log(`Draft built: ${actualRounds} rounds, ${batchedPlayers.length} players batched`);
+
           room.players = batchedPlayers;
           room.draftPool = room.players.splice(0, numTeams);
+          room.draftRoundPhases = roundPhases;
+          room.draftPhase = (roundPhases[0] || 'Wicketkeepers') as AuctionRoom['draftPhase'];
           room.draftOrder = shuffleArray(Object.keys(room.teams));
           room.draftTurnIndex = 0;
           room.draftRound = 1;
+          room.draftLimit = actualRounds; // Clamp limit to actual rounds built
           room.draftDirection = 'forward';
-          room.timer = 30; // 30 seconds to pick
+          room.timer = 30;
         } else {
           room.players = structurePlayers([...PLAYERS], room.auctionType);
           room.currentPlayerIndex = 0;
@@ -628,15 +667,25 @@ async function startServer() {
       retentions.forEach(pid => {
         const player = PLAYERS.find(p => p.id === pid);
         if (player) {
+          let currentCost = 0;
           if (player.isUncapped) {
-            cost += 4;
+            currentCost = 4;
+            cost += currentCost;
             uncappedCount++;
           } else {
-            cost += cappedCosts[cappedCount] || 14;
+            currentCost = cappedCosts[cappedCount] || 14;
+            cost += currentCost;
             cappedCount++;
           }
           // Add to squad
-          team.squad.push({ ...player, soldPrice: 0, soldTo: uid }); // soldPrice 0 as it's retention
+          team.squad.push({ ...player, soldPrice: currentCost, soldTo: uid });
+          // Add to history
+          room.history.push({
+            playerId: player.id,
+            teamId: team.teamId || 'unknown',
+            price: currentCost,
+            timestamp: new Date().toISOString()
+          });
           // Remove from room players
           const pIdx = room.players.findIndex(p => p.id === pid);
           if (pIdx !== -1) room.players.splice(pIdx, 1);
@@ -680,6 +729,12 @@ async function startServer() {
       room.draftRound! += 1;
       room.draftPool = room.players.splice(0, numTeams);
       room.playerFacts = {}; // Reset facts for new pool
+
+      // Update draft phase based on pre-computed schedule
+      const newPhase = room.draftRoundPhases?.[room.draftRound! - 1];
+      if (newPhase && newPhase !== room.draftPhase) {
+        room.draftPhase = newPhase as AuctionRoom['draftPhase'];
+      }
       
       // If no more players, finish
       if (room.draftPool.length === 0) {
@@ -688,9 +743,8 @@ async function startServer() {
         return;
       }
       
-      // In snake draft, the last person picks twice (end of round + start of next)
-      // So if we just finished a forward round, the last person picks again for backward.
-      // The draftTurnIndex should stay the same for the first pick of the next round in snake.
+      // Snake draft: last picker of previous round picks first in next round.
+      // The draftTurnIndex stays the same at the round boundary.
     } else {
       // Move to next turn within the round
       if (room.draftDirection === 'forward') {

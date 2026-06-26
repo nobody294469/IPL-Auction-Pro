@@ -92,6 +92,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
   }, [rightCollapsed, room.id]);
 
   useEffect(() => {
+    if (room.auctionType === 'draft') return; // Draft mode phase transitions are handled separately
     if (currentPlayer) {
       const currentSet = currentPlayer.auctionSet || 'General Pool';
       if (lastSetRef.current !== currentSet) {
@@ -106,7 +107,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
     } else if (room.status === 'lobby' || room.status === 'finished') {
       lastSetRef.current = null;
     }
-  }, [currentPlayer?.id, room.status]);
+  }, [currentPlayer?.id, room.status, room.auctionType]);
 
   useEffect(() => {
     if (upcomingSetOverlay) {
@@ -116,6 +117,23 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
       return () => clearTimeout(timer);
     }
   }, [upcomingSetOverlay]);
+
+  // Draft Mode: trigger phase transition overlay when draftPhase changes
+  useEffect(() => {
+    if (room.auctionType !== 'draft') return;
+    if (room.status === 'lobby' || room.status === 'finished') {
+      lastSetRef.current = null;
+      return;
+    }
+    if (!room.draftPhase) return;
+    if (lastSetRef.current !== room.draftPhase) {
+      lastSetRef.current = room.draftPhase;
+      setUpcomingSetOverlay(room.draftPhase);
+      const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-system-notification-1444.mp3');
+      audio.volume = 0.3;
+      audio.play().catch(() => {});
+    }
+  }, [room.draftPhase, room.auctionType, room.status]);
 
   const chatEndRef = useRef<HTMLDivElement>(null);
   const roomRef = useRef(room);
@@ -508,6 +526,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                 upcomingSetOverlay === 'Wicketkeepers' ? 'bg-emerald-500' :
                 upcomingSetOverlay === 'All-rounders' ? 'bg-purple-500' :
                 upcomingSetOverlay === 'Bowlers' ? 'bg-blue-500' :
+                upcomingSetOverlay === 'Flexible' ? 'bg-teal-500' :
                 'bg-orange-600'
               }`} />
 
@@ -525,6 +544,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                     {upcomingSetOverlay === 'All-rounders' && '⭐'}
                     {upcomingSetOverlay === 'Bowlers' && '🎯'}
                     {upcomingSetOverlay === 'Accelerated' && '🚀'}
+                    {upcomingSetOverlay === 'Flexible' && '🔀'}
                   </span>
                 </motion.div>
 
@@ -535,7 +555,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                     transition={{ delay: 0.3 }}
                     className="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-400"
                   >
-                    Set Starting Next
+                    {room.auctionType === 'draft' ? 'Phase Starting Next' : 'Set Starting Next'}
                   </motion.p>
                   <motion.h1
                     initial={{ opacity: 0, y: 20 }}
@@ -549,6 +569,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                     {upcomingSetOverlay === 'All-rounders' && 'All-rounders'}
                     {upcomingSetOverlay === 'Bowlers' && 'Bowlers'}
                     {upcomingSetOverlay === 'Accelerated' && 'Accelerated Round'}
+                    {upcomingSetOverlay === 'Flexible' && 'Flexible Picks'}
                   </motion.h1>
                 </div>
 
@@ -560,6 +581,10 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                 >
                   {
                     (() => {
+                      if (room.auctionType === 'draft') {
+                        const remaining = (room.players?.length || 0) + (room.draftPool?.length || 0);
+                        return `${remaining} Player${remaining !== 1 ? 's' : ''} remaining in draft`;
+                      }
                       const totalInSet = room.players.filter(p => p.auctionSet === upcomingSetOverlay).length;
                       return `${totalInSet} Player${totalInSet !== 1 ? 's' : ''} in this set`;
                     })()
@@ -870,11 +895,17 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                             ? 'It is your turn to pick!' 
                             : `Waiting for ${room.teams[currentTurnUserId!]?.displayName || 'Team'} to pick`}
                         </p>
-                        {room.draftPool && room.draftPool.length > 0 && room.draftPool[0] && (
+                        {room.draftPhase && (
                           <div className="flex items-center gap-1.5 mt-0.5">
                             <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
                             <span className="text-[9px] font-black uppercase tracking-[0.2em] text-zinc-400">
-                              Current Role: <span className="text-white">{room.draftPool[0].role}s</span>
+                              Phase: <span className="text-white">
+                                {room.draftPhase === 'Wicketkeepers' && '🧤 Wicketkeepers'}
+                                {room.draftPhase === 'Batters' && '🏏 Batters'}
+                                {room.draftPhase === 'All-rounders' && '⭐ All-rounders'}
+                                {room.draftPhase === 'Bowlers' && '🎯 Bowlers'}
+                                {room.draftPhase === 'Flexible' && '🔀 Flexible Picks'}
+                              </span>
                             </span>
                             <span className="text-[9px] font-black uppercase tracking-[0.2em] text-zinc-600 mx-1">|</span>
                             <span className="text-[9px] font-black uppercase tracking-[0.2em] text-zinc-400">
@@ -1430,7 +1461,11 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                 {myProfile.squad.length > 0 ? (myProfile.squad as any[]).slice().reverse().map((p: any) => (
                   <div key={p.id} className="flex items-center justify-between text-[12px] p-2 bg-white/5 rounded-lg border border-white/5">
                     <span className="truncate max-w-[110px] font-bold text-zinc-300">{p.name}</span>
-                    {room.auctionType !== 'draft' && <span className="font-black text-orange-500">₹{p.soldPrice?.toFixed(2)}Cr</span>}
+                    {room.auctionType !== 'draft' ? (
+                      <span className="font-black text-orange-500">₹{p.soldPrice?.toFixed(2)}Cr</span>
+                    ) : (
+                      <span className="font-black text-orange-500">DRAFTED</span>
+                    )}
                   </div>
                 )) : (
                   <div className="text-center py-6 border border-dashed border-white/5 rounded-xl">
@@ -1592,8 +1627,10 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                                 <span className="text-[8px] font-black text-zinc-500 uppercase tracking-widest">{player.role}</span>
                               </div>
                             </div>
-                            {room.auctionType !== 'draft' && (
+                            {room.auctionType !== 'draft' ? (
                               <span className="text-[10px] font-black text-orange-500">₹{player.soldPrice?.toFixed(2)}Cr</span>
+                            ) : (
+                              <span className="text-[10px] font-black text-orange-500 tracking-widest">DRAFTED</span>
                             )}
                           </div>
                         )) : (

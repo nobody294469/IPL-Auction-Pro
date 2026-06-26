@@ -270,7 +270,7 @@ export const Home = ({ user }: { user: FirebaseUser }) => {
                       </button>
                       <span className="text-xl font-black text-white w-12 text-center">{customDraftLimit}</span>
                       <button 
-                        onClick={() => setCustomDraftLimit(prev => Math.min(30, prev + 1))}
+                        onClick={() => setCustomDraftLimit(prev => Math.min(20, prev + 1))}
                         className="w-10 h-10 rounded-xl bg-zinc-800 hover:bg-zinc-700 hover:text-orange-500 flex items-center justify-center text-white font-black transition-all duration-150 cursor-pointer"
                       >
                         +

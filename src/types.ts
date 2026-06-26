@@ -25,6 +25,7 @@ export interface Player {
   id: string;
   name: string;
   role: 'Top Order' | 'Middle Order' | 'Wicket-keeper' | 'Finisher' | 'All-rounder' | 'Pacer' | 'Spinner';
+  draftCategory?: 'Wicketkeeper' | 'Batter' | 'All-rounder' | 'Bowler';
   country: string;
   basePrice: number;
   image: string;
@@ -90,6 +91,8 @@ export interface AuctionRoom {
   draftDirection?: 'forward' | 'backward';
   draftPool?: Player[];
   draftLimit?: number;
+  draftPhase?: 'Wicketkeepers' | 'Batters' | 'All-rounders' | 'Bowlers' | 'Flexible';
+  draftRoundPhases?: string[];
   draftAnalysis?: {
     rankings: string[];
     bestTeamReason: string;

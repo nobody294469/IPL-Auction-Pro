@@ -30,7 +30,7 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
         <p className="text-zinc-500 text-center max-w-md mb-8">
           {isHost 
             ? 'As the host, you can monitor the retention progress of all teams.' 
-            : 'You need to select a team in the lobby to participate in the retention phase.'}
+            : 'You did not select a team in the lobby. You can still proceed without any retentions.'}
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl mb-12">
@@ -54,17 +54,34 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
           })}
         </div>
 
-        {isHost && (
-          <button 
-            onClick={forceStart}
-            className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:bg-orange-500 transition-all"
-          >
-            Force Start Auction
-          </button>
-        )}
+        <div className="flex flex-col items-center gap-4">
+          {!isHost && myProfile && !myProfile.retentionSubmitted && (
+            <button
+              onClick={() => socket?.emit('submit-retentions', { roomId: room.id, userId: user.uid, playerIds: [] })}
+              className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:bg-orange-500 transition-all"
+            >
+              Submit — No Retentions
+            </button>
+          )}
+          {!isHost && myProfile?.retentionSubmitted && (
+            <div className="flex items-center gap-2 text-green-500 font-black uppercase tracking-widest text-sm">
+              <CheckCircle2 size={18} />
+              Submitted — Waiting for others...
+            </div>
+          )}
+          {isHost && (
+            <button 
+              onClick={forceStart}
+              className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:bg-orange-500 transition-all"
+            >
+              Force Start Auction
+            </button>
+          )}
+        </div>
       </div>
     );
   }
+
 
   const myTeam = TEAMS.find(t => t.id === myProfile.teamId);
   const teamPlayers = PLAYERS.filter(p => p.previousTeamId === myProfile.teamId);

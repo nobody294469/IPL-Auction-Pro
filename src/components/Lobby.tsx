@@ -203,7 +203,7 @@ export const Lobby = ({ user, room, socket }: { user: FirebaseUser, room: Auctio
                         -
                       </button>
                       <button 
-                        onClick={() => updateSettings(room.purse, room.bidTime, Math.min(30, (room.draftLimit || 15) + 1))}
+                        onClick={() => updateSettings(room.purse, room.bidTime, Math.min(20, (room.draftLimit || 15) + 1))}
                         className="w-8 h-8 rounded-lg bg-zinc-800 hover:bg-zinc-700 hover:text-orange-500 flex items-center justify-center transition-all duration-150 text-white font-black cursor-pointer active:scale-90 text-sm"
                       >
                         +

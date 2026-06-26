@@ -1,0 +1,637 @@
+﻿[
+  {
+    "name": "Virat Kohli",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Jasprit Bumrah",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Hardik Pandya",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "MS Dhoni",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Rashid Khan",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Glenn Maxwell",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Rohit Sharma",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "KL Rahul",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Andre Russell",
+    "draftCategory": "All-rounder",
+    "role": "Finisher"
+  },
+  {
+    "name": "Mohammed Shami",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Shubman Gill",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Suryakumar Yadav",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Ravindra Jadeja",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "David Warner",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Jos Buttler",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Trent Boult",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Pat Cummins",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Mitchell Starc",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Rishabh Pant",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Yuzvendra Chahal",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Quinton de Kock",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Liam Livingstone",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Sam Curran",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Nicholas Pooran",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Wanindu Hasaranga",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Ruturaj Gaikwad",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Yashasvi Jaiswal",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Sanju Samson",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Kuldeep Yadav",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Mohammed Siraj",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Faf du Plessis",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Shikhar Dhawan",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Shreyas Iyer",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Prithvi Shaw",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Axar Patel",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Marcus Stoinis",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "David Miller",
+    "draftCategory": "Batter",
+    "role": "Finisher"
+  },
+  {
+    "name": "Kane Williamson",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Tilak Varma",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Tim David",
+    "draftCategory": "Batter",
+    "role": "Finisher"
+  },
+  {
+    "name": "Abhishek Sharma",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Bhuvneshwar Kumar",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Nitish Rana",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Devdutt Padikkal",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Ayush Badoni",
+    "draftCategory": "Batter",
+    "role": "Finisher"
+  },
+  {
+    "name": "Mohsin Khan",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Deepak Chahar",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Shardul Thakur",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Rajat Patidar",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Anrich Nortje",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Lockie Ferguson",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Jason Holder",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Ravichandran Ashwin",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Harshit Rana",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Ramandeep Singh",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Dhruv Jurel",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Rahul Tewatia",
+    "draftCategory": "Batter",
+    "role": "Finisher"
+  },
+  {
+    "name": "Varun Chakravarthy",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Sunil Narine",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Mitchell Marsh",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Cameron Green",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Glenn Phillips",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Phil Salt",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Heinrich Klaasen",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Rinku Singh",
+    "draftCategory": "Batter",
+    "role": "Finisher"
+  },
+  {
+    "name": "Shahrukh Khan",
+    "draftCategory": "Batter",
+    "role": "Finisher"
+  },
+  {
+    "name": "Sai Sudharsan",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Mukesh Kumar",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Ravi Bishnoi",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Harshal Patel",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Krunal Pandya",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Rahul Chahar",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Moeen Ali",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Jason Roy",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Shimron Hetmyer",
+    "draftCategory": "Batter",
+    "role": "Finisher"
+  },
+  {
+    "name": "David Willey",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Chris Jordan",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Adam Zampa",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Josh Hazlewood",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Kieron Pollard",
+    "draftCategory": "All-rounder",
+    "role": "Finisher"
+  },
+  {
+    "name": "AB de Villiers",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Chris Gayle",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Dwayne Bravo",
+    "draftCategory": "All-rounder",
+    "role": "Finisher"
+  },
+  {
+    "name": "Travis Head",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Jake Fraser-McGurk",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Spencer Johnson",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Will Jacks",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Jacob Bethell",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Jofra Archer",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Jonny Bairstow",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Kagiso Rabada",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Tristan Stubbs",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Dewald Brevis",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Rovman Powell",
+    "draftCategory": "Batter",
+    "role": "Finisher"
+  },
+  {
+    "name": "Rachin Ravindra",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Devon Conway",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Noor Ahmad",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Matheesha Pathirana",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Shivam Dube",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Riyan Parag",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Nitish Reddy",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Mayank Yadav",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Shashank Singh",
+    "draftCategory": "Batter",
+    "role": "Finisher"
+  },
+  {
+    "name": "Prabhsimran Singh",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Yash Dayal",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Sandeep Sharma",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Abhishek Porel",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Venkatesh Iyer",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Ishan Kishan",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Arshdeep Singh",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Finn Allen",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Ayush Mhatre",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Urvil Patel",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Anshul Kamboj",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Vaibhav Suryavanshi",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Suyash Sharma",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Priyansh Arya",
+    "draftCategory": "Batter",
+    "role": "Top Order"
+  },
+  {
+    "name": "Angkrish Raghuvanshi",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Sameer Rizvi",
+    "draftCategory": "Batter",
+    "role": "Finisher"
+  },
+  {
+    "name": "Gerald Coetzee",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Nuwan Thushara",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Nandre Burger",
+    "draftCategory": "Bowler",
+    "role": "Pacer"
+  },
+  {
+    "name": "Allah Ghazanfar",
+    "draftCategory": "Bowler",
+    "role": "Spinner"
+  },
+  {
+    "name": "Sikandar Raza",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Azmatullah Omarzai",
+    "draftCategory": "All-rounder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Dinesh Karthik",
+    "draftCategory": "Wicketkeeper",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Ambati Rayudu",
+    "draftCategory": "Batter",
+    "role": "Middle Order"
+  }
+]

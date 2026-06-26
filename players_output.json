@@ -1,0 +1,510 @@
+[
+  {
+    "name": "Virat Kohli",
+    "role": "Top Order"
+  },
+  {
+    "name": "Jasprit Bumrah",
+    "role": "Pacer"
+  },
+  {
+    "name": "Hardik Pandya",
+    "role": "All-rounder"
+  },
+  {
+    "name": "MS Dhoni",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Rashid Khan",
+    "role": "Spinner"
+  },
+  {
+    "name": "Glenn Maxwell",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Rohit Sharma",
+    "role": "Top Order"
+  },
+  {
+    "name": "KL Rahul",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Andre Russell",
+    "role": "Finisher"
+  },
+  {
+    "name": "Mohammed Shami",
+    "role": "Pacer"
+  },
+  {
+    "name": "Shubman Gill",
+    "role": "Top Order"
+  },
+  {
+    "name": "Suryakumar Yadav",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Ravindra Jadeja",
+    "role": "All-rounder"
+  },
+  {
+    "name": "David Warner",
+    "role": "Top Order"
+  },
+  {
+    "name": "Jos Buttler",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Trent Boult",
+    "role": "Pacer"
+  },
+  {
+    "name": "Pat Cummins",
+    "role": "Pacer"
+  },
+  {
+    "name": "Mitchell Starc",
+    "role": "Pacer"
+  },
+  {
+    "name": "Rishabh Pant",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Yuzvendra Chahal",
+    "role": "Spinner"
+  },
+  {
+    "name": "Quinton de Kock",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Liam Livingstone",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Sam Curran",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Nicholas Pooran",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Wanindu Hasaranga",
+    "role": "Spinner"
+  },
+  {
+    "name": "Ruturaj Gaikwad",
+    "role": "Top Order"
+  },
+  {
+    "name": "Yashasvi Jaiswal",
+    "role": "Top Order"
+  },
+  {
+    "name": "Sanju Samson",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Kuldeep Yadav",
+    "role": "Spinner"
+  },
+  {
+    "name": "Mohammed Siraj",
+    "role": "Pacer"
+  },
+  {
+    "name": "Faf du Plessis",
+    "role": "Top Order"
+  },
+  {
+    "name": "Shikhar Dhawan",
+    "role": "Top Order"
+  },
+  {
+    "name": "Shreyas Iyer",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Prithvi Shaw",
+    "role": "Top Order"
+  },
+  {
+    "name": "Axar Patel",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Marcus Stoinis",
+    "role": "All-rounder"
+  },
+  {
+    "name": "David Miller",
+    "role": "Finisher"
+  },
+  {
+    "name": "Kane Williamson",
+    "role": "Top Order"
+  },
+  {
+    "name": "Tilak Varma",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Tim David",
+    "role": "Finisher"
+  },
+  {
+    "name": "Abhishek Sharma",
+    "role": "Top Order"
+  },
+  {
+    "name": "Bhuvneshwar Kumar",
+    "role": "Pacer"
+  },
+  {
+    "name": "Nitish Rana",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Devdutt Padikkal",
+    "role": "Top Order"
+  },
+  {
+    "name": "Ayush Badoni",
+    "role": "Finisher"
+  },
+  {
+    "name": "Mohsin Khan",
+    "role": "Pacer"
+  },
+  {
+    "name": "Deepak Chahar",
+    "role": "Pacer"
+  },
+  {
+    "name": "Shardul Thakur",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Rajat Patidar",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Anrich Nortje",
+    "role": "Pacer"
+  },
+  {
+    "name": "Lockie Ferguson",
+    "role": "Pacer"
+  },
+  {
+    "name": "Jason Holder",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Ravichandran Ashwin",
+    "role": "Spinner"
+  },
+  {
+    "name": "Harshit Rana",
+    "role": "Pacer"
+  },
+  {
+    "name": "Ramandeep Singh",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Dhruv Jurel",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Rahul Tewatia",
+    "role": "Finisher"
+  },
+  {
+    "name": "Varun Chakravarthy",
+    "role": "Spinner"
+  },
+  {
+    "name": "Sunil Narine",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Mitchell Marsh",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Cameron Green",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Glenn Phillips",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Phil Salt",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Heinrich Klaasen",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Rinku Singh",
+    "role": "Finisher"
+  },
+  {
+    "name": "Shahrukh Khan",
+    "role": "Finisher"
+  },
+  {
+    "name": "Sai Sudharsan",
+    "role": "Top Order"
+  },
+  {
+    "name": "Mukesh Kumar",
+    "role": "Pacer"
+  },
+  {
+    "name": "Ravi Bishnoi",
+    "role": "Spinner"
+  },
+  {
+    "name": "Harshal Patel",
+    "role": "Pacer"
+  },
+  {
+    "name": "Krunal Pandya",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Rahul Chahar",
+    "role": "Spinner"
+  },
+  {
+    "name": "Moeen Ali",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Jason Roy",
+    "role": "Top Order"
+  },
+  {
+    "name": "Shimron Hetmyer",
+    "role": "Finisher"
+  },
+  {
+    "name": "David Willey",
+    "role": "Pacer"
+  },
+  {
+    "name": "Chris Jordan",
+    "role": "Pacer"
+  },
+  {
+    "name": "Adam Zampa",
+    "role": "Spinner"
+  },
+  {
+    "name": "Josh Hazlewood",
+    "role": "Pacer"
+  },
+  {
+    "name": "Kieron Pollard",
+    "role": "Finisher"
+  },
+  {
+    "name": "AB de Villiers",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Chris Gayle",
+    "role": "Top Order"
+  },
+  {
+    "name": "Dwayne Bravo",
+    "role": "Finisher"
+  },
+  {
+    "name": "Travis Head",
+    "role": "Top Order"
+  },
+  {
+    "name": "Jake Fraser-McGurk",
+    "role": "Top Order"
+  },
+  {
+    "name": "Spencer Johnson",
+    "role": "Pacer"
+  },
+  {
+    "name": "Will Jacks",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Jacob Bethell",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Jofra Archer",
+    "role": "Pacer"
+  },
+  {
+    "name": "Jonny Bairstow",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Kagiso Rabada",
+    "role": "Pacer"
+  },
+  {
+    "name": "Tristan Stubbs",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Dewald Brevis",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Rovman Powell",
+    "role": "Finisher"
+  },
+  {
+    "name": "Rachin Ravindra",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Devon Conway",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Noor Ahmad",
+    "role": "Spinner"
+  },
+  {
+    "name": "Matheesha Pathirana",
+    "role": "Pacer"
+  },
+  {
+    "name": "Shivam Dube",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Riyan Parag",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Nitish Reddy",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Mayank Yadav",
+    "role": "Pacer"
+  },
+  {
+    "name": "Shashank Singh",
+    "role": "Finisher"
+  },
+  {
+    "name": "Prabhsimran Singh",
+    "role": "Top Order"
+  },
+  {
+    "name": "Yash Dayal",
+    "role": "Pacer"
+  },
+  {
+    "name": "Sandeep Sharma",
+    "role": "Pacer"
+  },
+  {
+    "name": "Abhishek Porel",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Venkatesh Iyer",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Ishan Kishan",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Arshdeep Singh",
+    "role": "Pacer"
+  },
+  {
+    "name": "Finn Allen",
+    "role": "Top Order"
+  },
+  {
+    "name": "Ayush Mhatre",
+    "role": "Top Order"
+  },
+  {
+    "name": "Urvil Patel",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Anshul Kamboj",
+    "role": "Pacer"
+  },
+  {
+    "name": "Vaibhav Suryavanshi",
+    "role": "Top Order"
+  },
+  {
+    "name": "Suyash Sharma",
+    "role": "Spinner"
+  },
+  {
+    "name": "Priyansh Arya",
+    "role": "Top Order"
+  },
+  {
+    "name": "Angkrish Raghuvanshi",
+    "role": "Middle Order"
+  },
+  {
+    "name": "Sameer Rizvi",
+    "role": "Finisher"
+  },
+  {
+    "name": "Gerald Coetzee",
+    "role": "Pacer"
+  },
+  {
+    "name": "Nuwan Thushara",
+    "role": "Pacer"
+  },
+  {
+    "name": "Nandre Burger",
+    "role": "Pacer"
+  },
+  {
+    "name": "Allah Ghazanfar",
+    "role": "Spinner"
+  },
+  {
+    "name": "Sikandar Raza",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Azmatullah Omarzai",
+    "role": "All-rounder"
+  },
+  {
+    "name": "Dinesh Karthik",
+    "role": "Wicket-keeper"
+  },
+  {
+    "name": "Ambati Rayudu",
+    "role": "Middle Order"
+  }
+]
