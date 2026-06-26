@@ -1,0 +1,70 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account information and budget.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "budget": { "type": "number", "description": "Remaining budget in crores" },
+        "squad": { "type": "array", "items": { "type": "string" }, "description": "List of player IDs owned" }
+      },
+      "required": ["uid", "displayName", "budget"]
+    },
+    "AuctionRoom": {
+      "title": "Auction Room",
+      "description": "A room where users gather to bid on players.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "createdBy": { "type": "string" },
+        "status": { "type": "string", "enum": ["waiting", "active", "finished"] },
+        "currentPlayerId": { "type": "string" },
+        "currentBid": { "type": "number" },
+        "currentBidderId": { "type": "string" },
+        "timer": { "type": "number", "description": "Seconds remaining for current player" },
+        "purse": { "type": "number", "description": "Total budget allocated per team in Cr" },
+        "bidTime": { "type": "number", "description": "Maximum time allowed for a single bid in seconds" },
+        "participants": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["id", "name", "status"]
+    },
+    "Player": {
+      "title": "IPL Player",
+      "description": "Player stats and base price.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string", "enum": ["Top Order", "Middle Order", "Wicket-keeper", "Finisher", "All-rounder", "Pacer", "Spinner"] },
+        "basePrice": { "type": "number" },
+        "image": { "type": "string" },
+        "soldTo": { "type": "string" },
+        "soldPrice": { "type": "number" }
+      },
+      "required": ["id", "name", "basePrice"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/rooms/{roomId}": {
+      "schema": "AuctionRoom",
+      "description": "Active auction rooms"
+    },
+    "/players/{playerId}": {
+      "schema": "Player",
+      "description": "Master list of players"
+    },
+    "/rooms/{roomId}/players/{playerId}": {
+      "schema": "Player",
+      "description": "Players available in a specific room"
+    }
+  }
+}
