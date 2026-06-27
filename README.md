@@ -1,174 +1,224 @@
-<div align="center">
-  <h1>🏏 IPL Auction Pro</h1>
-  <p>A feature-rich, real-time multiplayer IPL Auction simulator built with React, Node.js, and Socket.io.</p>
-</div>
+# 🏏 IPL Auction Pro
 
----
+A modern, real-time **multiplayer IPL Auction Simulator** that recreates the excitement of a professional cricket auction. Create private auction rooms, invite friends, compete in multiple auction formats, build balanced squads, and review your team's performance through interactive analytics.
 
-## 🚀 Live Demo
+## 🌐 Live Demo
 
-**Experience the auction live:** [https://ipl-auction-pro-v1.onrender.com](https://ipl-auction-pro-v1.onrender.com)
+**Live Application:** https://ipl-auction-pro-v1.onrender.com/
 
 ---
 
 ## ✨ Features
 
-- **Real-Time Bidding Engine:** Sub-second latency for placing and broadcasting bids across all connected clients.
-- **Curated Player Database:** Features a carefully selected pool of **127 players**, complete with base prices, roles, and stats.
-- **Team Management:** Track team purses, squad composition, and remaining slots dynamically.
-- **Responsive UI:** A modern, mobile-friendly interface built with Tailwind CSS and Framer Motion.
-- **Admin Dashboard:** Control the flow of the auction, manage timers, and resolve disputes.
+* ⚡ Real-time multiplayer auction using Socket.io
+* 👥 Create and join private auction rooms
+* 🏏 Curated database of **127 IPL players**
+* 💰 Live bidding with synchronized budgets
+* 📊 Real-time squad and budget tracking
+* 🤖 AI-powered post-auction analysis
+* 📈 Interactive squad strength and budget graphs
+* 🔐 Google Authentication with Firebase
+* ☁️ Firebase Firestore for persistent room data
+* 📱 Responsive UI with smooth animations
 
 ---
 
-## 🎲 Auction Modes
+# 🎮 Auction Modes
 
-Bring different strategic flavors to your auction with multiple game modes:
+### 🔸 Open Auction
 
-- **Open Auction:** The classic format. Players are brought up one by one, and franchises engage in an open bidding war until the timer runs out.
-- **Blind Auction:** Franchises submit sealed bids for a player. The highest bidder wins without knowing what others have offered.
-- **Mega Auction:** Emulates the official mega auction rules with larger purses, right-to-match (RTM) cards, and strict squad constraints.
-- **Draft Mode:** A turn-based selection system where franchises pick players in a snake-draft format without a bidding process.
+Classic live IPL auction where franchises compete by continuously increasing bids until the timer expires.
 
----
+### 🔸 Blind Auction
 
-## 🤖 AI Features
+Managers submit hidden bids. The highest bid wins without revealing competitors' offers.
 
-- **Scouting Reports:** Every player comes with a detailed, **pre-generated scouting report**, giving managers insights into strengths, weaknesses, and recent form.
-- **Post-Auction Analysis:** (Where applicable) Uses **Gemini AI** to evaluate team performance, squad balance, and value-for-money buys at the end of the auction.
+### 🔸 Draft Mode
 
----
+A structured snake draft with dedicated phases for:
 
-## 🛠️ Tech Stack
+* Wicketkeepers
+* Batters
+* All-rounders
+* Bowlers
 
-**Frontend:**
-- React 19 + TypeScript (Vite)
-- Tailwind CSS v4 for styling
-- Framer Motion for animations
-- Recharts for data visualization
-- Lucide React for iconography
+The draft automatically manages turn order, round transitions, and player allocation.
 
-**Backend & Real-time:**
-- Node.js & Express
-- Socket.io for real-time bi-directional communication
-- Firebase (Auth/Firestore/Realtime Database)
+### 🔸 Mega Auction
 
-**AI Integration:**
-- Google Gemini API (`@google/genai`)
+Inspired by IPL Mega Auctions with squad retentions, larger purses and long-form squad building.
 
 ---
 
-## 🏗️ Architecture Overview
+# 🤖 AI Features
 
-The application utilizes a client-server architecture tailored for real-time state synchronization:
-1. **Clients (React):** Establish WebSocket connections to the server upon joining a room. They emit bidding actions and render state updates.
-2. **Server (Express + Socket.io):** Acts as the single source of truth during the active auction. It validates bids, manages countdown timers, and broadcasts state changes to all clients in a room.
-3. **Database (Firebase):** Persists user profiles, long-term auction results, and pre-generated player data (scouting reports, base stats).
-
----
-
-## 💻 Installation
-
-### Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
-
-### Steps
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/ipl-auction-pro.git
-   cd ipl-auction-pro
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Run the development server:**
-   ```bash
-   # Starts both Vite frontend and local Node server
-   npm run dev
-   ```
+* Pre-generated player scouting reports
+* AI-assisted post-auction squad reviews
+* Team balance analysis
+* Squad strength insights
 
 ---
 
-## 🔑 Environment Variables
+# 🛠 Tech Stack
 
-Create a `.env` file in the root directory and add the following variables:
+### Frontend
+
+* React 19
+* TypeScript
+* Vite
+* Tailwind CSS v4
+* Framer Motion
+* Recharts
+* Lucide React
+
+### Backend
+
+* Node.js
+* Express
+* Socket.io
+
+### Database & Authentication
+
+* Firebase Authentication
+* Firebase Firestore
+
+### AI
+
+* Google Gemini API
+
+---
+
+# 📸 Screenshots
+
+## Home
+
+![Home](assets/screenshots/home.png)
+
+## Lobby
+
+![Lobby](assets/screenshots/lobby.png)
+
+## Open Auction
+
+![Open Auction](assets/screenshots/open-auction.png)
+
+## Blind Auction
+
+![Blind Auction](assets/screenshots/blind-auction.png)
+
+## Draft Mode
+
+![Draft Mode](assets/screenshots/draft-mode.png)
+
+## Mega Auction
+
+![Mega Auction](assets/screenshots/mega-auction.png)
+
+## Results
+
+![Results](assets/screenshots/results.png)
+
+---
+
+# ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/nobody294469/IPL-Auction-Pro-v1.git
+cd IPL-Auction-Pro-v1
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Build the project:
+
+```bash
+npm run build
+```
+
+Run the production server:
+
+```bash
+npm start
+```
+
+---
+
+# 🔑 Environment Variables
+
+Create a `.env` file in the project root:
 
 ```env
-# Server
-VITE_API_URL=http://localhost:3000
-
-# Firebase Configuration
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-
-# Gemini AI (for post-auction analysis)
 GEMINI_API_KEY=your_gemini_api_key
+APP_URL=http://localhost:3000
 ```
 
 ---
 
-## 📁 Project Structure
+# 🚀 Deployment
 
-```text
-ipl-auction-pro/
-├── src/
-│   ├── components/    # Reusable React components (UI, Modals, Cards)
-│   ├── data/          # Static assets and pre-generated player lists (127 players)
-│   ├── hooks/         # Custom React hooks (e.g., useSocket, useAuctionState)
-│   ├── services/      # API clients and Firebase configuration
-│   ├── utils/         # Helper functions (currency formatting, logic)
-│   ├── App.tsx        # Main application routing and context providers
-│   └── main.tsx       # Entry point
-├── server.ts          # Express & Socket.io backend implementation
-├── firebase.json      # Firebase rules and hosting config
-└── package.json       # Project metadata and dependencies
+The project is deployed on **Render**.
+
+Build Command:
+
+```bash
+npm run build
+```
+
+Start Command:
+
+```bash
+npm start
 ```
 
 ---
 
-## 📸 Screenshots
+# 📂 Project Structure
 
-*(Replace the placeholder URLs with actual screenshots once deployed)*
+```
+src/
+├── components/
+├── data/
+├── hooks/
+├── services/
+├── utils/
+├── App.tsx
+├── main.tsx
 
-| Auction Dashboard | Player Scouting Report |
-| :---: | :---: |
-| ![Dashboard](https://placehold.co/600x400/1e293b/ffffff?text=Auction+Dashboard+Here) | ![Scouting](https://placehold.co/600x400/1e293b/ffffff?text=Scouting+Report+Here) |
-
-| Live Bidding | Post-Auction Analysis |
-| :---: | :---: |
-| ![Bidding](https://placehold.co/600x400/1e293b/ffffff?text=Live+Bidding+UI+Here) | ![Analysis](https://placehold.co/600x400/1e293b/ffffff?text=AI+Analysis+Here) |
-
----
-
-## 🚀 Deployment
-
-The project is configured for easy deployment on platforms like Render, Heroku, or Vercel.
-
-**For Render (Combined Frontend/Backend):**
-1. Set the Build Command to `npm run build`
-2. Set the Start Command to `npm start`
-3. Ensure all environment variables from `.env` are added to the Render dashboard.
+server.ts
+package.json
+```
 
 ---
 
-## 🔮 Future Improvements
+# 🔮 Future Improvements
 
-- Implementation of a player retention system.
-- Historical auction data and statistics tracker.
-- Integration with live cricket APIs for dynamically updating player base prices based on recent real-world performance.
-- Support for custom, user-created player pools.
+* Custom player database import
+* Auction history and statistics
+* Tournament mode
+* Custom franchises
+* Player value prediction
+* Voice auctioneer mode
 
 ---
 
-## 📄 License
+# 👨‍💻 Author
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+**Sammyag Solanki**
+
+---
+
+## ⭐ Support
+
+If you found this project interesting, consider giving the repository a ⭐ on GitHub.
