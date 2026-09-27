@@ -1,6 +1,0 @@
-{
-  "name": "IPL Auction Pro",
-  "description": "A real-time IPL live auction platform to compete with friends and others.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

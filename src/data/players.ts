@@ -2255,3 +2255,7 @@ export const PLAYERS: Player[] = [
     "draftCategory": "Batter"
   }
 ];
+
+// Deep freeze to prevent any accidental global state leakage or mutation
+PLAYERS.forEach(Object.freeze);
+Object.freeze(PLAYERS);

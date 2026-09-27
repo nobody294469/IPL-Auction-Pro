@@ -1,68 +1,83 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { 
-  auth, 
-  googleProvider 
+import {
+  auth,
+  googleProvider
 } from '../firebase';
-import { 
-  signInWithPopup, 
-  signOut, 
-  User as FirebaseUser 
+import {
+  signInWithPopup,
+  signOut,
+  User as FirebaseUser
 } from 'firebase/auth';
-import { Trophy, LogOut } from 'lucide-react';
+import { Gavel, LogOut } from 'lucide-react';
 
 export const Navbar = ({ user }: { user: FirebaseUser | null }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Hide Navbar in the Arena or Retention phases for full-screen immersion
+  // Hide Navbar in room phases for full-screen focus
   if (location.pathname.includes('/room/')) return null;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 h-20 bg-zinc-950/70 backdrop-blur-md border-b border-white/10 flex items-center justify-between px-4 sm:px-8 z-50 transition-all duration-300">
-      <div 
-        className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group select-none" 
+    <nav className="fixed top-0 left-0 right-0 h-16 bg-zinc-950/85 backdrop-blur-md border-b border-white/10 flex items-center justify-between px-4 sm:px-8 z-50 transition-colors">
+      <div
+        className="flex items-center gap-3 cursor-pointer select-none group"
         onClick={() => navigate('/')}
       >
-        <div className="p-1.5 sm:p-2 bg-orange-500 rounded-xl group-hover:rotate-6 group-hover:scale-105 transition-all duration-300 shadow-lg shadow-orange-500/20">
-          <Trophy className="text-black w-5 h-5 sm:w-6 sm:h-6" />
+        {/* Custom Cricket Auction Pro Brand Mark */}
+        <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500/20 via-orange-500/10 to-transparent border border-amber-500/30 flex items-center justify-center shadow-[0_0_15px_-3px_rgba(245,158,11,0.25)] group-hover:border-amber-400/50 group-hover:shadow-[0_0_20px_-2px_rgba(245,158,11,0.4)] transition-all">
+          <svg viewBox="0 0 24 24" className="w-5 h-5 drop-shadow" fill="none">
+            {/* Wooden gavel head tilted diagonally */}
+            <path d="M14.5 4.5L19.5 9.5L17.5 11.5L12.5 6.5L14.5 4.5Z" fill="url(#gavel-wood)" stroke="#fbbf24" strokeWidth="1" strokeLinejoin="round" />
+            {/* Gavel handle extending towards bottom-left */}
+            <path d="M13.5 10.5L6.5 17.5C5.8 18.2 4.8 18.2 4.1 17.5C3.4 16.8 3.4 15.8 4.1 15.1L11.1 8.1" stroke="#f97316" strokeWidth="2.2" strokeLinecap="round" />
+            {/* Sound block beneath gavel */}
+            <path d="M15 17.5L20.5 17.5" stroke="#fbbf24" strokeWidth="2.2" strokeLinecap="round" />
+            <path d="M13 20L22 20" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" opacity="0.8" />
+            {/* Cricket ball accent badge on upper right */}
+            <circle cx="7" cy="6.5" r="2.5" fill="#dc2626" stroke="#991b1b" strokeWidth="0.8" />
+            <path d="M5.5 7.5C6.5 6.5 7.5 5.5 8.5 5.5" stroke="#ffffff" strokeWidth="0.6" strokeLinecap="round" opacity="0.9" />
+            <defs>
+              <linearGradient id="gavel-wood" x1="12" y1="4" x2="19" y2="11" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#f59e0b" />
+                <stop offset="1" stopColor="#b45309" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
-        <div className="flex flex-col">
-          <span className="font-black text-lg sm:text-2xl tracking-tighter text-white leading-none">IPL AUCTION</span>
-          <span className="text-[8px] sm:text-[10px] font-bold text-orange-500 tracking-[0.25em] sm:tracking-[0.3em] uppercase">Pro Arena</span>
+        <div className="flex items-baseline gap-1.5">
+          <span className="font-display font-semibold text-lg text-white tracking-tight">IPL Auction</span>
+          <span className="font-display font-bold text-lg text-orange-500 tracking-tight">Pro</span>
         </div>
       </div>
-      
-      <div className="flex items-center gap-4 sm:gap-6">
+
+      <div className="flex items-center gap-4">
         {user ? (
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-3">
             <div className="flex flex-col items-end hidden sm:flex">
-              <span className="text-sm font-black text-white leading-tight">{user.displayName}</span>
-              <div className="flex items-center gap-1 mt-0.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-[8px] text-zinc-500 font-bold uppercase tracking-widest">Active</span>
-              </div>
+              <span className="text-sm font-medium text-zinc-200 leading-tight">{user.displayName}</span>
+              <span className="text-xs text-zinc-400">Online</span>
             </div>
-            <img 
-              src={user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.uid}`} 
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl object-cover hover:border-orange-500/50 transition-all duration-300"
+            <img
+              src={user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.uid}`}
+              className="w-8 h-8 rounded-lg border border-zinc-800 object-cover"
               alt="Avatar"
               referrerPolicy="no-referrer"
             />
-            <button 
+            <button
               onClick={() => signOut(auth)}
-              className="p-2 hover:bg-white/5 rounded-xl transition-all duration-200 text-zinc-500 hover:text-red-400 cursor-pointer active:scale-95"
-              title="Logout"
+              className="p-1.5 hover:bg-zinc-900 rounded-lg transition-colors text-zinc-400 hover:text-zinc-200 cursor-pointer"
+              title="Sign out"
             >
-              <LogOut size={18} />
+              <LogOut size={16} />
             </button>
           </div>
         ) : (
-          <button 
+          <button
             onClick={() => signInWithPopup(auth, googleProvider)}
-            className="bg-white hover:bg-zinc-200 text-black font-black py-2.5 px-4 sm:py-3 sm:px-6 rounded-xl sm:rounded-2xl transition-all duration-200 transform hover:scale-[1.02] active:scale-95 shadow-xl shadow-white/5 cursor-pointer text-xs sm:text-sm"
+            className="bg-white hover:bg-zinc-100 text-zinc-950 font-medium py-2 px-4 rounded-lg transition-colors cursor-pointer text-xs sm:text-sm"
           >
-            Login with Google
+            Sign in
           </button>
         )}
       </div>

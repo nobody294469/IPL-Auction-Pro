@@ -13,7 +13,7 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
   const navigate = useNavigate();
   const myProfile = room.teams[user.uid];
   const isHost = room.hostId === user.uid;
-  
+
   const forceStart = () => {
     if (isHost) {
       socket?.emit('force-process-retentions', { roomId: room.id });
@@ -22,30 +22,30 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
 
   if (!myProfile || !myProfile.teamId) {
     return (
-      <div className="h-screen bg-black text-white flex flex-col items-center justify-center p-8">
-        <Shield size={64} className="text-zinc-800 mb-6" />
-        <h2 className="text-2xl font-black uppercase tracking-tighter mb-2">
-          {isHost ? 'Retention Monitor' : 'No Team Selected'}
+      <div className="h-screen bg-zinc-950 text-white flex flex-col items-center justify-center p-8">
+        <Shield size={48} className="text-zinc-700 mb-4" />
+        <h2 className="text-xl font-semibold tracking-tight mb-2">
+          {isHost ? 'Retention monitor' : 'No team selected'}
         </h2>
-        <p className="text-zinc-500 text-center max-w-md mb-8">
-          {isHost 
-            ? 'As the host, you can monitor the retention progress of all teams.' 
+        <p className="text-zinc-400 text-center max-w-md mb-8 text-sm font-normal">
+          {isHost
+            ? 'As host, you can monitor the retention progress of all teams.'
             : 'You did not select a team in the lobby. You can still proceed without any retentions.'}
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-3xl mb-8">
           {Object.values(room.teams).map((team, idx) => {
             const teamInfo = TEAMS.find(t => t.id === team.teamId);
             return (
-              <div key={idx} className="bg-zinc-900 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-black border border-white/10 flex items-center justify-center">
-                  {teamInfo ? <img src={teamInfo.logo} className="w-8 h-8 object-contain" alt="Logo" /> : <Shield size={20} className="text-zinc-700" />}
+              <div key={idx} className="bg-zinc-900 border border-zinc-800 p-3.5 rounded-xl flex flex-col items-center gap-2.5">
+                <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center">
+                  {teamInfo ? <img src={teamInfo.logo} className="w-7 h-7 object-contain" alt="Logo" /> : <Shield size={18} className="text-zinc-600" />}
                 </div>
                 <div className="text-center">
-                  <p className="text-[10px] font-black text-zinc-500 uppercase tracking-widest truncate w-24">
+                  <p className="text-xs font-medium text-zinc-300 truncate w-24">
                     {teamInfo?.name || 'Spectator'}
                   </p>
-                  <div className={`mt-1 text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${team.retentionSubmitted ? 'bg-green-500/20 text-green-500' : 'bg-orange-500/20 text-orange-500 animate-pulse'}`}>
+                  <div className={`mt-1 text-[10px] font-medium px-2 py-0.5 rounded-full ${team.retentionSubmitted ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-orange-500/10 text-orange-400 border border-orange-500/20'}`}>
                     {team.retentionSubmitted ? 'Ready' : 'Deciding...'}
                   </div>
                 </div>
@@ -54,27 +54,27 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
           })}
         </div>
 
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-3">
           {!isHost && myProfile && !myProfile.retentionSubmitted && (
             <button
               onClick={() => socket?.emit('submit-retentions', { roomId: room.id, userId: user.uid, playerIds: [] })}
-              className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:bg-orange-500 transition-all"
+              className="px-6 py-2.5 bg-white text-zinc-950 font-medium text-sm rounded-xl hover:bg-zinc-200 transition-colors cursor-pointer"
             >
-              Submit — No Retentions
+              Submit without retentions
             </button>
           )}
           {!isHost && myProfile?.retentionSubmitted && (
-            <div className="flex items-center gap-2 text-green-500 font-black uppercase tracking-widest text-sm">
-              <CheckCircle2 size={18} />
-              Submitted — Waiting for others...
+            <div className="flex items-center gap-2 text-green-400 font-medium text-sm">
+              <CheckCircle2 size={16} />
+              Submitted â€” Waiting for other teams...
             </div>
           )}
           {isHost && (
-            <button 
+            <button
               onClick={forceStart}
-              className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:bg-orange-500 transition-all"
+              className="px-6 py-2.5 bg-orange-500 text-zinc-950 font-medium text-sm rounded-xl hover:bg-orange-400 transition-colors cursor-pointer shadow-sm"
             >
-              Force Start Auction
+              Force start auction
             </button>
           )}
         </div>
@@ -82,10 +82,9 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
     );
   }
 
-
   const myTeam = TEAMS.find(t => t.id === myProfile.teamId);
   const teamPlayers = PLAYERS.filter(p => p.previousTeamId === myProfile.teamId);
-  
+
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [timer, setTimer] = useState(room.timer);
 
@@ -97,27 +96,27 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
 
   const togglePlayer = (id: string) => {
     if (myProfile.retentionSubmitted) return;
-    
+
     setSelectedIds(prev => {
       if (prev.includes(id)) return prev.filter(i => i !== id);
       if (prev.length >= 6) {
-        toast.error("Maximum 6 retentions allowed!");
+        toast.error("Maximum 6 retentions allowed");
         return prev;
       }
-      
+
       const player = PLAYERS.find(p => p.id === id);
       const cappedCount = prev.filter(pid => !PLAYERS.find(p => p.id === pid)?.isUncapped).length;
       const uncappedCount = prev.filter(pid => PLAYERS.find(p => p.id === pid)?.isUncapped).length;
-      
+
       if (!player?.isUncapped && cappedCount >= 5) {
-        toast.error("Maximum 5 capped players allowed!");
+        toast.error("Maximum 5 capped players allowed");
         return prev;
       }
       if (player?.isUncapped && uncappedCount >= 2) {
-        toast.error("Maximum 2 uncapped players allowed!");
+        toast.error("Maximum 2 uncapped players allowed");
         return prev;
       }
-      
+
       return [...prev, id];
     });
   };
@@ -130,7 +129,7 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
     let cost = 0;
     let cappedCount = 0;
     const cappedCosts = [18, 14, 11, 18, 14];
-    
+
     selectedIds.forEach(id => {
       const player = PLAYERS.find(p => p.id === id);
       if (player?.isUncapped) {
@@ -146,163 +145,169 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
   const totalCost = calculateTotalCost();
 
   return (
-    <div className="h-screen h-[100dvh] bg-black text-white flex flex-col p-4 md:p-8 overflow-hidden">
-      <div className="max-w-6xl mx-auto w-full flex-1 flex flex-col gap-8">
+    <div className="h-screen h-[100dvh] bg-zinc-950 text-white flex flex-col p-4 md:p-6 overflow-hidden">
+      <div className="max-w-6xl mx-auto w-full flex-1 flex flex-col gap-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <button 
+          <div className="flex items-center gap-4">
+            <button
               onClick={() => navigate('/')}
-              className="p-3 bg-zinc-900 hover:bg-zinc-800 rounded-2xl border border-white/5 transition-all group"
+              className="p-2.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white rounded-xl border border-zinc-800 transition-colors cursor-pointer"
+              title="Leave room"
             >
-              <ArrowLeft className="text-zinc-500 group-hover:text-white" size={20} />
+              <ArrowLeft size={18} />
             </button>
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center overflow-hidden">
-                <img src={myTeam?.logo} className="w-12 h-12 object-contain" alt="Logo" />
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden">
+                <img src={myTeam?.logo} className="w-9 h-9 object-contain" alt="Logo" />
               </div>
-              <div>
-                <h1 className="text-4xl font-black tracking-tighter uppercase">{myTeam?.name}</h1>
-                <p className="text-zinc-500 font-black text-[10px] uppercase tracking-widest">Retention Phase • {selectedIds.length}/6 Selected</p>
+              <div className="text-left">
+                <h1 className="text-xl sm:text-2xl font-display font-semibold tracking-tight">{myTeam?.name}</h1>
+                <p className="text-zinc-400 text-xs font-normal">Retention phase â€¢ {selectedIds.length}/6 selected</p>
               </div>
             </div>
           </div>
-          
-          <div className="flex items-center gap-8">
+
+          <div className="flex items-center gap-6">
             {isHost && (
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 <button
                   onClick={() => socket?.emit(room.isPaused ? 'resume-auction' : 'pause-auction', { roomId: room.id, userId: user.uid })}
-                  className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-all group border ${
-                    room.isPaused 
-                      ? 'bg-green-500/10 border-green-500/20 hover:bg-green-500/20' 
-                      : 'bg-orange-500/10 border-orange-500/20 hover:bg-orange-500/20'
+                  className={`px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors border text-xs font-medium cursor-pointer ${
+                    room.isPaused
+                      ? 'bg-green-500/10 border-green-500/20 text-green-400 hover:bg-green-500/20'
+                      : 'bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-750'
                   }`}
                 >
                   {room.isPaused ? (
                     <>
-                      <Play size={14} className="text-green-500 fill-green-500" />
-                      <span className="text-[10px] font-black uppercase tracking-widest text-green-500">Resume</span>
+                      <Play size={12} fill="currentColor" />
+                      <span>Resume</span>
                     </>
                   ) : (
                     <>
-                      <Pause size={14} className="text-orange-500 fill-orange-500" />
-                      <span className="text-[10px] font-black uppercase tracking-widest text-orange-500">Pause</span>
+                      <Pause size={12} fill="currentColor" />
+                      <span>Pause</span>
                     </>
                   )}
                 </button>
-                <button 
+                <button
                   onClick={forceStart}
-                  className="px-4 py-2 bg-zinc-900 border border-white/5 hover:border-orange-500/50 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all"
+                  className="px-3 py-1.5 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-xs font-medium text-zinc-300 rounded-lg transition-colors cursor-pointer"
                 >
-                  Force Start
+                  Force start
                 </button>
               </div>
             )}
             <div className="text-right">
-              <p className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">Estimated Cost</p>
-              <p className="text-3xl font-black text-orange-500 tracking-tighter">₹{totalCost} Cr</p>
+              <p className="text-xs text-zinc-400 font-normal">Estimated cost</p>
+              <p className="text-xl font-semibold font-mono tabular-nums text-orange-400">â‚¹{totalCost} Cr</p>
             </div>
-            <div className="w-20 h-20 rounded-full border-4 border-white/5 flex items-center justify-center relative">
+            <div className="w-14 h-14 rounded-full border-2 border-zinc-800 flex items-center justify-center relative">
               <svg className="absolute inset-0 w-full h-full -rotate-90">
-                <circle 
-                  cx="40" cy="40" r="36" 
-                  fill="none" stroke="currentColor" strokeWidth="4" 
-                  className="text-orange-500/20"
+                <circle
+                  cx="28" cy="28" r="24"
+                  fill="none" stroke="currentColor" strokeWidth="3"
+                  className="text-zinc-800"
                 />
-                <motion.circle 
-                  cx="40" cy="40" r="36" 
-                  fill="none" stroke="currentColor" strokeWidth="4" 
-                  strokeDasharray={226}
-                  animate={{ strokeDashoffset: 226 - (226 * timer / 60) }}
+                <motion.circle
+                  cx="28" cy="28" r="24"
+                  fill="none" stroke="currentColor" strokeWidth="3"
+                  strokeDasharray={150}
+                  animate={{ strokeDashoffset: 150 - (150 * timer / 60) }}
                   className="text-orange-500"
                 />
               </svg>
-              <span className="text-2xl font-black">{room.isPaused ? '||' : `${timer}s`}</span>
+              <span className="text-sm font-mono tabular-nums font-semibold">{room.isPaused ? '||' : `${timer}s`}</span>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-y-auto custom-scrollbar pr-2 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 overflow-y-auto custom-scrollbar pr-1 pb-4">
           {teamPlayers.map(player => {
             const isSelected = selectedIds.includes(player.id);
             return (
-              <motion.div 
+              <div
                 key={player.id}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
                 onClick={() => togglePlayer(player.id)}
-                className={`relative p-4 rounded-3xl border-2 transition-all cursor-pointer overflow-hidden group ${isSelected ? 'bg-orange-500 border-orange-500 text-black' : 'bg-zinc-900 border-white/5 hover:border-white/20'}`}
+                className={`p-3.5 rounded-xl border transition-colors cursor-pointer relative ${
+                  isSelected
+                    ? 'bg-orange-500/10 border-orange-500 ring-1 ring-orange-500/30'
+                    : 'bg-zinc-900 border-zinc-800 hover:border-zinc-700'
+                }`}
               >
-                <div className="flex items-center gap-4 relative z-10">
-                  <img 
-                    src={player.image || `https://api.dicebear.com/7.x/initials/svg?seed=${player.name}`} 
-                    className={`w-16 h-16 rounded-2xl object-cover ${isSelected ? 'bg-black/20' : 'bg-zinc-800'}`} 
+                <div className="flex items-center gap-3">
+                  <img
+                    src={player.image || `https://api.dicebear.com/7.x/initials/svg?seed=${player.name}`}
+                    className="w-12 h-12 rounded-lg object-cover bg-zinc-800"
                     alt={player.name}
                     referrerPolicy="no-referrer"
                   />
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-black text-lg truncate leading-none mb-1">{player.name}</h3>
-                    <div className="flex items-center gap-2">
-                      <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${isSelected ? 'bg-black/10' : 'bg-white/5 text-zinc-500'}`}>
+                  <div className="flex-1 min-w-0 text-left">
+                    <h3 className="font-medium text-sm truncate leading-tight mb-1 text-white">{player.name}</h3>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] font-medium text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded-md">
                         {player.role}
                       </span>
                       {player.isUncapped && (
-                        <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${isSelected ? 'bg-black/20' : 'bg-blue-500/20 text-blue-500'}`}>
+                        <span className="text-[10px] font-medium text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-md">
                           Uncapped
                         </span>
                       )}
                     </div>
                   </div>
                 </div>
-                
+
                 {isSelected && (
-                  <div className="absolute top-4 right-4 z-20">
-                    <CheckCircle2 size={24} className="text-black" />
+                  <div className="absolute top-3 right-3 text-orange-500">
+                    <CheckCircle2 size={16} strokeWidth={2.5} />
                   </div>
                 )}
-                
-                <div className={`absolute -bottom-2 -right-2 opacity-10 transition-transform group-hover:scale-110 ${isSelected ? 'text-black' : 'text-white'}`}>
-                  <Shield size={80} />
-                </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
-        <div className="mt-auto pt-8 border-t border-white/5 flex items-center justify-between">
-          <div className="flex flex-col gap-1">
-            <p className="text-zinc-500 text-sm font-medium">Select up to 5 capped and 2 uncapped players (Max 6 total).</p>
-            <p className="text-zinc-600 text-[10px] font-black uppercase tracking-widest italic">Note: Retention costs follow IPL 2025 slabs.</p>
+        <div className="mt-auto pt-4 border-t border-zinc-800 flex items-center justify-between">
+          <div className="text-left">
+            <p className="text-zinc-400 text-xs font-normal">Select up to 5 capped and 2 uncapped players (maximum 6 retentions).</p>
+            <p className="text-zinc-500 text-[11px] font-normal">Costs deducted from total auction purse.</p>
           </div>
-          
-          <button 
+
+          <button
             onClick={submitRetentions}
             disabled={myProfile.retentionSubmitted}
-            className={`px-12 py-5 rounded-2xl font-black uppercase tracking-widest transition-all shadow-2xl ${myProfile.retentionSubmitted ? 'bg-zinc-800 text-zinc-600 cursor-not-allowed' : 'bg-white text-black hover:bg-orange-500 hover:scale-105 active:scale-95'}`}
+            className={`px-6 py-2.5 rounded-xl font-medium text-sm transition-colors cursor-pointer ${
+              myProfile.retentionSubmitted
+                ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                : 'bg-orange-500 hover:bg-orange-400 text-zinc-950 shadow-sm'
+            }`}
           >
-            {myProfile.retentionSubmitted ? 'Submitted' : 'Confirm Retentions'}
+            {myProfile.retentionSubmitted ? 'Retentions confirmed' : 'Confirm retentions'}
           </button>
         </div>
       </div>
 
       <AnimatePresence>
         {myProfile.retentionSubmitted && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
           >
-            <div className="text-center space-y-4">
-              <div className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto shadow-2xl shadow-orange-500/20">
-                <CheckCircle2 size={40} className="text-black" />
+            <div className="text-center space-y-3 bg-zinc-900 border border-zinc-800 p-8 rounded-2xl max-w-sm w-full">
+              <div className="w-12 h-12 bg-green-500/10 border border-green-500/20 text-green-400 rounded-xl flex items-center justify-center mx-auto">
+                <CheckCircle2 size={24} />
               </div>
-              <h2 className="text-3xl font-black tracking-tighter uppercase">Retentions Locked</h2>
-              <p className="text-zinc-500 max-w-xs mx-auto">Waiting for other teams to finalize their squads before the Mega Auction begins...</p>
-              <div className="flex items-center justify-center gap-2 pt-4">
+              <h2 className="text-lg font-semibold tracking-tight text-white">Retentions locked</h2>
+              <p className="text-zinc-400 text-xs font-normal leading-relaxed">
+                Waiting for remaining franchises to finalize retentions before the mega auction begins.
+              </p>
+              <div className="flex items-center justify-center gap-2 pt-3">
                 {Object.values(room.teams).map((team, idx) => (
-                  <div 
+                  <div
                     key={idx}
-                    className={`w-2 h-2 rounded-full ${team.retentionSubmitted ? 'bg-orange-500' : 'bg-zinc-800 animate-pulse'}`}
+                    className={`w-2 h-2 rounded-full ${team.retentionSubmitted ? 'bg-orange-500' : 'bg-zinc-700 animate-pulse'}`}
+                    title={team.displayName}
                   />
                 ))}
               </div>

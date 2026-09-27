@@ -1,46 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-glow: glow 2s ease-in-out infinite alternate;
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-  }
-
-  @keyframes glow {
-    from { box-shadow: 0 0 10px -2px rgba(249, 115, 22, 0.5); }
-    to { box-shadow: 0 0 20px 2px rgba(249, 115, 22, 0.8); }
-  }
 }
 
 @layer utilities {
-  .text-glow {
-    text-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+  .font-display {
+    font-family: var(--font-display);
   }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  /* Restrained elevation surfaces */
+  .surface-flat {
+    background-color: #0c0c0e;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .surface-raised {
+    background-color: #141417;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  }
+
+  .surface-overlay {
+    background-color: #1a1a1f;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Stadium background with cinematic cricket stadium atmosphere & restrained contrast */
   .bg-stadium {
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=2067&auto=format&fit=crop');
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(249, 115, 22, 0.08), transparent 70%),
+      linear-gradient(to bottom, rgba(7, 8, 12, 0.72) 0%, rgba(7, 8, 12, 0.88) 50%, rgba(7, 8, 12, 0.98) 100%),
+      url('/images/stadium_bg.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center top;
     background-attachment: fixed;
+    background-repeat: no-repeat;
   }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
+    height: 4px;
   }
   .custom-scrollbar::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.02);
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(249, 115, 22, 0.3);
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(249, 115, 22, 0.5);
+    background: rgba(255, 255, 255, 0.2);
   }
 }
 
+/* Custom Cricket-Ball Cursor (Subtle 20px leather ball with white seam) */
+:root {
+  --cursor-cricket-ball: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cdefs%3E%3CradialGradient id='b' cx='35%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%23e02828'/%3E%3Cstop offset='60%25' stop-color='%239e1414'/%3E%3Cstop offset='100%25' stop-color='%234a0606'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='10' cy='10' r='8' fill='url(%23b)' stroke='%232e0505' stroke-width='0.75'/%3E%3Ccircle cx='7.5' cy='7.5' r='2' fill='white' opacity='0.22'/%3E%3Cpath d='M4.5 13.5 C 7 11.5, 12.5 8.5, 15.5 6.5' stroke='%23ffffff' stroke-width='0.9' stroke-linecap='round' opacity='0.9'/%3E%3Cpath d='M5 13 L6 14 M7.5 11 L8.5 12 M10 9.2 L11 10.2 M12.5 7.5 L13.5 8.5 M15 5.8 L16 6.8' stroke='%23ffffff' stroke-width='0.65' stroke-linecap='round' opacity='0.75'/%3E%3C/svg%3E");
+}
+
+body {
+  cursor: var(--cursor-cricket-ball) 10 10, auto;
+}
+
+/* Explicitly retain appropriate browser/UI cursors for all interactive elements */
+button,
+a,
+select,
+[role="button"],
+label,
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+textarea {
+  cursor: text !important;
+}
+
+button:disabled,
+input:disabled,
+[disabled] {
+  cursor: not-allowed !important;
+}

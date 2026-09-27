@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const GlassCard = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => (
-  <div className={`bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden ${className}`}>
+  <div className={`bg-zinc-900/70 border border-zinc-800/80 rounded-2xl overflow-hidden ${className}`}>
     {children}
   </div>
 );

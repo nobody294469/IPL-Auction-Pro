@@ -44,8 +44,12 @@ service cloud.firestore {
 
     match /rooms/{roomId} {
       allow read: if isAuthenticated();
-      allow create: if isAuthenticated();
-      allow update: if isAuthenticated(); // Simplified for now, will harden later
+      allow create: if isAuthenticated() &&
+                    request.resource.data.hostId == request.auth.uid &&
+                    request.resource.data.name is string &&
+                    request.resource.data.name.size() > 0 &&
+                    request.resource.data.name.size() <= 100;
+      allow update, delete: if isAuthenticated() && resource.data.hostId == request.auth.uid;
     }
 
     match /players/{playerId} {
@@ -54,11 +58,12 @@ service cloud.firestore {
 
     match /rooms/{roomId}/players/{playerId} {
       allow read: if isAuthenticated();
-      allow write: if isAuthenticated();
+      allow write: if isAuthenticated() &&
+                     get(/databases/$(database)/documents/rooms/$(roomId)).data.hostId == request.auth.uid;
     }
 
     match /test/connection {
-      allow read: if true;
+      allow read: if isAuthenticated();
     }
   }
 }

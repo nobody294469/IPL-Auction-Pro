@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  BrowserRouter as Router, 
-  Routes, 
-  Route 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
 } from 'react-router-dom';
 import { auth } from './firebase';
 import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
@@ -31,11 +31,7 @@ export default function App() {
         <Toaster position="top-center" theme="dark" richColors closeButton />
         <Navbar user={user} />
         <Routes>
-          <Route path="/" element={
-            <AuthGuard user={user} loading={loading}>
-              <Home user={user!} />
-            </AuthGuard>
-          } />
+          <Route path="/" element={<Home user={user} />} />
           <Route path="/room/:roomId" element={
             <AuthGuard user={user} loading={loading}>
               <RoomManager user={user!} />

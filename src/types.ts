@@ -10,6 +10,7 @@ export interface UserProfile {
   rtmCards: number;
   retentions?: string[];
   retentionSubmitted?: boolean;
+  isConnected?: boolean;
 }
 
 export interface Team {
