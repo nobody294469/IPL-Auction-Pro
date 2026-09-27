@@ -1,6 +1,6 @@
-# ðŸ IPL Auction Pro
+# IPL Auction Pro
 
-[![CI](https://github.com/nobody294469/IPL-Auction-Pro-v1/actions/workflows/ci.yml/badge.svg)](https://github.com/nobody294469/IPL-Auction-Pro-v1/actions/workflows/ci.yml)
+[![CI](https://github.com/nobody294469/IPL-Auction-Pro/actions/workflows/ci.yml/badge.svg)](https://github.com/nobody294469/IPL-Auction-Pro/actions/workflows/ci.yml)
 
 A real-time multiplayer cricket auction simulator and squad management platform designed around synchronized live bidding, server-authoritative state progression, and tactical intelligence.
 
@@ -18,7 +18,7 @@ The application is engineered around real-time WebSocket communication (Socket.I
 
 - **Real-Time Multiplayer Arena**: Synchronized live auction sessions across multiple managers with live bid broadcasts and countdown timers via Socket.IO.
 - **Server-Authoritative Auction Engine**: The server strictly enforces bid increments, validates available purse balances, computes squad limits, advances timers, and resolves lots.
-- **Official IPL Franchise Showcase**: Complete lineup of 10 official franchises (MI, CSK, RCB, KKR, DC, GT, LSG, PBKS, RR, SRH) with authentic branding and default â‚¹120 Cr purses.
+- **Official IPL Franchise Showcase**: Complete lineup of 10 official franchises (MI, CSK, RCB, KKR, DC, GT, LSG, PBKS, RR, SRH) with authentic branding and default Rs.120 Cr purses.
 - **Curated Dataset**: 127 professionally cataloged cricketers across specialized auction sets (Marquee, Batters, Wicketkeepers, All-rounders, Bowlers) with domestic and international T20 statistics.
 - **Token-Authenticated Sockets**: Socket.IO connections verify Firebase Auth ID tokens directly against Google's public x509 certificates before permitting room participation.
 - **Pre-Auction Squad Retentions**: Mega Auction rooms support pre-auction retention declarations with configurable slot caps and purse deductions.
@@ -56,14 +56,14 @@ Gemini AI capabilities are exposed strictly through an authenticated Express bac
 
 ```
 React Client (SPA)
-       â”‚
-       â–¼ (HTTP POST /api/ai-summary, /api/draft-analysis, etc.)
+       |
+       v  (HTTP POST /api/ai-summary, /api/draft-analysis, etc.)
 Express API Layer (server.ts)
-       â”‚
-       â–¼
+       |
+       v
 Gemini Server Service (geminiServer.ts)
-       â”‚  (Iterates: gemini-2.5-flash â†’ gemini-2.0-flash â†’ gemini-1.5-flash)
-       â–¼
+       |  (Iterates: gemini-2.5-flash -> gemini-2.0-flash -> gemini-1.5-flash)
+       v
 Google Gemini API (@google/genai)
 ```
 
@@ -94,26 +94,26 @@ Google Gemini API (@google/genai)
 ## System Architecture
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                   React 19 Frontend                    â”‚
-â”‚   (Vite + Tailwind CSS + Space Grotesk / Inter Typography)â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-               â”‚                          â”‚
-   Firebase ID â”‚ (Handshake Auth)         â”‚ API Requests
-   Token       â–¼                          â–¼ (/api/*)
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                   Node.js / Express                    â”‚
-â”‚  - Socket.IO Server (Authenticated by Google Certs)     â”‚
-â”‚  - Server-Authoritative Room & Bidding Memory Engine   â”‚
-â”‚  - Gemini AI Proxy Service (Holds GEMINI_API_KEY)      â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-               â”‚                          â”‚
-      Verifies â”‚ Firebase                 â”‚ Calls API
-      Token    â–¼                          â–¼
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚   Google Public x509    â”‚    â”‚    Google Gemini API    â”‚
-â”‚      Certificates       â”‚    â”‚     (@google/genai)     â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
++--------------------------------------------------------+
+|                   React 19 Frontend                    |
+|  (Vite + Tailwind CSS + Space Grotesk / Inter)         |
++--------------+--------------------------+--------------+
+               |                          |
+  Firebase ID  | (Handshake Auth)         | API Requests
+  Token        v                          v  (/api/*)
++--------------------------------------------------------+
+|                   Node.js / Express                    |
+|  - Socket.IO Server (Authenticated by Google Certs)    |
+|  - Server-Authoritative Room & Bidding Memory Engine   |
+|  - Gemini AI Proxy Service (Holds GEMINI_API_KEY)      |
++--------------+--------------------------+--------------+
+               |                          |
+     Verifies  | Firebase       Calls API |
+     Token     v                          v
++-------------------------+    +-------------------------+
+|  Google Public x509     |    |    Google Gemini API    |
+|     Certificates        |    |     (@google/genai)     |
++-------------------------+    +-------------------------+
 ```
 
 ### Real-Time vs. Persistent State Separation
@@ -136,43 +136,43 @@ Google Gemini API (@google/genai)
 
 ```
 ipl-auction-pro/
-â”œâ”€â”€ public/
-â”‚   â””â”€â”€ images/               # Stadium backgrounds and format motif banners
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ components/           # UI screens & modular components
-â”‚   â”‚   â”œâ”€â”€ AuctionArena.tsx  # Live bidding arena & real-time lot management
-â”‚   â”‚   â”œâ”€â”€ AuthGuard.tsx     # Authentication route protection
-â”‚   â”‚   â”œâ”€â”€ BudgetBurnGraph.tsx # Recharts budget spending curves
-â”‚   â”‚   â”œâ”€â”€ FinishedScreen.tsx# Post-auction podium & AI analytics
-â”‚   â”‚   â”œâ”€â”€ Home.tsx          # Broadcast landing page, stats, formats & room actions
-â”‚   â”‚   â”œâ”€â”€ Lobby.tsx         # Franchise claiming & participant ready check
-â”‚   â”‚   â”œâ”€â”€ Navbar.tsx        # Navigation bar & bespoke brand mark
-â”‚   â”‚   â”œâ”€â”€ RetentionArena.tsx# Pre-auction retention interface
-â”‚   â”‚   â”œâ”€â”€ RoomManager.tsx   # Socket coordinator & phase dispatcher
-â”‚   â”‚   â”œâ”€â”€ SquadPowerAnalysis.tsx # Squad balance breakdown
-â”‚   â”‚   â””â”€â”€ TradeArena.tsx    # Peer-to-peer manager trade desk
-â”‚   â”œâ”€â”€ data/
-â”‚   â”‚   â”œâ”€â”€ players.ts        # 127 cataloged IPL players with career stats
-â”‚   â”‚   â”œâ”€â”€ scoutingReports.ts# Pre-generated tactical insights per player
-â”‚   â”‚   â””â”€â”€ teams.ts          # 10 official IPL franchises
-â”‚   â”œâ”€â”€ hooks/
-â”‚   â”‚   â””â”€â”€ useTTS.ts         # Auctioneer text-to-speech engine
-â”‚   â”œâ”€â”€ services/
-â”‚   â”‚   â”œâ”€â”€ ai.ts             # Client-side API client for AI routes
-â”‚   â”‚   â”œâ”€â”€ authServer.ts     # Google cert fetching & Firebase JWT verification
-â”‚   â”‚   â””â”€â”€ geminiServer.ts   # Server-side Gemini GenAI client & fallback logic
-â”‚   â”œâ”€â”€ utils/
-â”‚   â”‚   â””â”€â”€ helpers.ts        # Currency formatting and flag helpers
-â”‚   â”œâ”€â”€ App.tsx               # Root route setup & sonner toaster
-â”‚   â”œâ”€â”€ firebase.ts           # Client Firebase initialization
-â”‚   â”œâ”€â”€ index.css             # Design tokens, stadium backgrounds & custom cursor
-â”‚   â”œâ”€â”€ main.tsx              # React DOM entrypoint
-â”‚   â””â”€â”€ types.ts              # TypeScript interfaces for rooms, players, trades
-â”œâ”€â”€ firestore.rules           # Cloud Firestore security rules
-â”œâ”€â”€ server.ts                 # Express API + Socket.IO server + Vite static serving
-â”œâ”€â”€ vite.config.ts            # Vite client build pipeline
-â”œâ”€â”€ package.json              # Scripts and pinned dependencies
-â””â”€â”€ .env.example              # Documented environment variables template
++-- public/
+|   +-- images/               # Stadium backgrounds and format motif banners
++-- src/
+|   +-- components/           # UI screens & modular components
+|   |   +-- AuctionArena.tsx  # Live bidding arena & real-time lot management
+|   |   +-- AuthGuard.tsx     # Authentication route protection
+|   |   +-- BudgetBurnGraph.tsx # Recharts budget spending curves
+|   |   +-- FinishedScreen.tsx  # Post-auction podium & AI analytics
+|   |   +-- Home.tsx          # Broadcast landing page, stats, formats & room actions
+|   |   +-- Lobby.tsx         # Franchise claiming & participant ready check
+|   |   +-- Navbar.tsx        # Navigation bar & bespoke brand mark
+|   |   +-- RetentionArena.tsx  # Pre-auction retention interface
+|   |   +-- RoomManager.tsx   # Socket coordinator & phase dispatcher
+|   |   +-- SquadPowerAnalysis.tsx # Squad balance breakdown
+|   |   +-- TradeArena.tsx    # Peer-to-peer manager trade desk
+|   +-- data/
+|   |   +-- players.ts        # 127 cataloged IPL players with career stats
+|   |   +-- scoutingReports.ts  # Pre-generated tactical insights per player
+|   |   +-- teams.ts          # 10 official IPL franchises
+|   +-- hooks/
+|   |   +-- useTTS.ts         # Auctioneer text-to-speech engine
+|   +-- services/
+|   |   +-- ai.ts             # Client-side API client for AI routes
+|   |   +-- authServer.ts     # Google cert fetching & Firebase JWT verification
+|   |   +-- geminiServer.ts   # Server-side Gemini GenAI client & fallback logic
+|   +-- utils/
+|   |   +-- helpers.ts        # Currency formatting and flag helpers
+|   +-- App.tsx               # Root route setup & sonner toaster
+|   +-- firebase.ts           # Client Firebase initialization
+|   +-- index.css             # Design tokens, stadium backgrounds & custom cursor
+|   +-- main.tsx              # React DOM entrypoint
+|   +-- types.ts              # TypeScript interfaces for rooms, players, trades
++-- firestore.rules           # Cloud Firestore security rules
++-- server.ts                 # Express API + Socket.IO server + Vite static serving
++-- vite.config.ts            # Vite client build pipeline
++-- package.json              # Scripts and pinned dependencies
++-- .env.example              # Documented environment variables template
 ```
 
 ---
@@ -188,32 +188,32 @@ ipl-auction-pro/
 ### Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/nobody294469/IPL-Auction-Pro-v1.git
-   cd IPL-Auction-Pro-v1
-   ```
+ ```bash
+ git clone https://github.com/nobody294469/IPL-Auction-Pro.git
+ cd IPL-Auction-Pro
+ ```
 
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
+ ```bash
+ npm install
+ ```
 
 3. Configure environment variables:
-   ```bash
-   cp .env.example .env
-   ```
-   Add your server secrets in `.env`:
-   ```env
-   GEMINI_API_KEY="your-gemini-api-key"
-   APP_URL="http://localhost:3000"
-   FIREBASE_PROJECT_ID="your-firebase-project-id"
-   ```
+ ```bash
+ cp .env.example .env
+ ```
+ Add your server secrets in `.env`:
+ ```env
+ GEMINI_API_KEY="your-gemini-api-key"
+ APP_URL="http://localhost:3000"
+ FIREBASE_PROJECT_ID="your-firebase-project-id"
+ ```
 
 4. Start the unified development server:
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:3000` in your browser.
+ ```bash
+ npm run dev
+ ```
+ Open `http://localhost:3000` in your browser.
 
 ---
 
@@ -236,8 +236,8 @@ IPL Auction Pro is configured for single-service deployment on **Render**:
 npm run build
 ```
 This triggers:
-1. `vite build` â€” Compiles the client React SPA into production static assets under `dist/`.
-2. `esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs` â€” Bundles the Node.js / Express / Socket.IO server into CommonJS.
+1. `vite build` -- Compiles the client React SPA into production static assets under `dist/`.
+2. `esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs` -- Bundles the Node.js / Express / Socket.IO server into CommonJS.
 
 ### Start Command:
 ```bash
@@ -281,6 +281,23 @@ A GitHub Actions workflow (`.github/workflows/ci.yml`) runs automatically on eve
 - **Stateless Room Restoration**: If a user refreshes during an auction, their client reconnects and syncs from the server's in-memory room state seamlessly. However, if the Node server restarts mid-auction, players must create a new room from the lobby.
 
 ---
+
+## Screenshots
+
+### Home
+![Home](assets/screenshots/home.png)
+
+### Lobby
+![Lobby](assets/screenshots/lobby.png)
+
+### Auction Arena
+![Auction Arena](assets/screenshots/auction-arena.png)
+
+### Blind Auction
+![Blind Auction](assets/screenshots/blind-auction.png)
+
+### Auction Summary
+![Auction Summary](assets/screenshots/auction-summary.png)
 
 ## Author & License
 
