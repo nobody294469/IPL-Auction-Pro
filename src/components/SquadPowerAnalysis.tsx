@@ -125,8 +125,8 @@ export const SquadPowerAnalysis = ({ squad, room, userId }: { squad: Player[], r
                   <h4 className="text-sm font-semibold text-zinc-100">{p.name}</h4>
                   {room.auctionType !== 'draft' ? (
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="text-xs font-semibold font-mono tabular-nums text-emerald-400">Ã¢â€šÂ¹{p.soldPrice?.toFixed(2)} Cr</span>
-                      <span className="text-[11px] text-zinc-400 font-mono tabular-nums">Base: Ã¢â€šÂ¹{p.basePrice} Cr</span>
+                      <span className="text-xs font-semibold font-mono tabular-nums text-emerald-400">Ã¢”šÂ¹{p.soldPrice?.toFixed(2)} Cr</span>
+                      <span className="text-[11px] text-zinc-400 font-mono tabular-nums">Base: Ã¢”šÂ¹{p.basePrice} Cr</span>
                     </div>
                   ) : (
                     <p className="text-xs text-zinc-400 mt-1">{p.role}</p>
@@ -139,4 +139,4 @@ export const SquadPowerAnalysis = ({ squad, room, userId }: { squad: Player[], r
       </GlassCard>
     </div>
   );
-};
+};

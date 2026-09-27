@@ -91,12 +91,12 @@ export const TradeArena = ({ user, room, socket }: { user: any, room: AuctionRoo
                         <div className="space-y-0.5">
                           <p className="text-zinc-500 text-[11px] font-normal">Offering</p>
                           <p className="text-white font-medium">{isIncoming ? trade.toPlayerIds.length : trade.fromPlayerIds.length} players</p>
-                          <p className="text-white font-mono tabular-nums">â‚¹{isIncoming ? trade.toCash : trade.fromCash} Cr</p>
+                          <p className="text-white font-mono tabular-nums">₹{isIncoming ? trade.toCash : trade.fromCash} Cr</p>
                         </div>
                         <div className="space-y-0.5 text-right">
                           <p className="text-zinc-500 text-[11px] font-normal">Receiving</p>
                           <p className="text-white font-medium">{isIncoming ? trade.fromPlayerIds.length : trade.toPlayerIds.length} players</p>
-                          <p className="text-white font-mono tabular-nums">â‚¹{isIncoming ? trade.fromCash : trade.toCash} Cr</p>
+                          <p className="text-white font-mono tabular-nums">₹{isIncoming ? trade.fromCash : trade.toCash} Cr</p>
                         </div>
                       </div>
 
@@ -139,7 +139,7 @@ export const TradeArena = ({ user, room, socket }: { user: any, room: AuctionRoo
                 <img src={myProfile.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${myProfile.uid}`} className="w-12 h-12 rounded-full mx-auto border border-orange-500/50" alt="" />
                 <div>
                   <h4 className="text-sm font-medium text-white">{myProfile.displayName}</h4>
-                  <p className="text-orange-400 font-mono tabular-nums text-xs">â‚¹{myProfile.budget.toFixed(2)} Cr</p>
+                  <p className="text-orange-400 font-mono tabular-nums text-xs">₹{myProfile.budget.toFixed(2)} Cr</p>
                 </div>
               </div>
               <div className="p-2.5 bg-zinc-900 border border-zinc-800 rounded-full text-zinc-400">
@@ -151,7 +151,7 @@ export const TradeArena = ({ user, room, socket }: { user: any, room: AuctionRoo
                     <img src={selectedTeam.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${selectedTeam.uid}`} className="w-12 h-12 rounded-full mx-auto border border-blue-500/50" alt="" />
                     <div>
                       <h4 className="text-sm font-medium text-white">{selectedTeam.displayName}</h4>
-                      <p className="text-blue-400 font-mono tabular-nums text-xs">â‚¹{selectedTeam.budget.toFixed(2)} Cr</p>
+                      <p className="text-blue-400 font-mono tabular-nums text-xs">₹{selectedTeam.budget.toFixed(2)} Cr</p>
                     </div>
                   </>
                 ) : (
@@ -187,7 +187,7 @@ export const TradeArena = ({ user, room, socket }: { user: any, room: AuctionRoo
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-[11px] font-normal text-zinc-500">Cash offered (â‚¹ Cr)</p>
+                  <p className="text-[11px] font-normal text-zinc-500">Cash offered (₹ Cr)</p>
                   <input
                     type="number"
                     value={myCash}
@@ -237,7 +237,7 @@ export const TradeArena = ({ user, room, socket }: { user: any, room: AuctionRoo
                       </div>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-[11px] font-normal text-zinc-500">Cash requested (â‚¹ Cr)</p>
+                      <p className="text-[11px] font-normal text-zinc-500">Cash requested (₹ Cr)</p>
                       <input
                         type="number"
                         value={theirCash}

@@ -293,7 +293,7 @@ export async function startServer(options: ServerOptions = {}) {
           const draftLimit = room.draftLimit || 15;
           console.log(`Initializing draft mode for ${numTeams} teams, ${draftLimit} rounds`);
 
-          // --- Phase Allocation (explicit design table, limits 5â€“20) ---
+          // --- Phase Allocation (explicit design table, limits 5”“20) ---
           const PHASE_TABLE: Record<number, { wk: number; bat: number; ar: number; bowl: number }> = {
             5:  { wk: 1, bat: 2, ar: 1, bowl: 1 },
             6:  { wk: 1, bat: 2, ar: 1, bowl: 2 },
@@ -365,7 +365,7 @@ export async function startServer(options: ServerOptions = {}) {
                 batchedPlayers.push(...picked);
                 roundPhases.push(phase.name);
               } else {
-                // Phase pool exhausted â€” convert remaining rounds of this phase to Flexible
+                // Phase pool exhausted ”” convert remaining rounds of this phase to Flexible
                 const flex = flexPick();
                 if (flex.length === numTeams) {
                   batchedPlayers.push(...flex);

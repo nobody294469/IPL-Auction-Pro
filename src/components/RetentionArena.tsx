@@ -66,7 +66,7 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
           {!isHost && myProfile?.retentionSubmitted && (
             <div className="flex items-center gap-2 text-green-400 font-medium text-sm">
               <CheckCircle2 size={16} />
-              Submitted â€” Waiting for other teams...
+              Submitted ”” Waiting for other teams...
             </div>
           )}
           {isHost && (
@@ -162,7 +162,7 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
               </div>
               <div className="text-left">
                 <h1 className="text-xl sm:text-2xl font-display font-semibold tracking-tight">{myTeam?.name}</h1>
-                <p className="text-zinc-400 text-xs font-normal">Retention phase â€¢ {selectedIds.length}/6 selected</p>
+                <p className="text-zinc-400 text-xs font-normal">Retention phase ”¢ {selectedIds.length}/6 selected</p>
               </div>
             </div>
           </div>
@@ -200,7 +200,7 @@ export const RetentionArena = ({ user, room, socket }: { user: FirebaseUser, roo
             )}
             <div className="text-right">
               <p className="text-xs text-zinc-400 font-normal">Estimated cost</p>
-              <p className="text-xl font-semibold font-mono tabular-nums text-orange-400">â‚¹{totalCost} Cr</p>
+              <p className="text-xl font-semibold font-mono tabular-nums text-orange-400">₹{totalCost} Cr</p>
             </div>
             <div className="w-14 h-14 rounded-full border-2 border-zinc-800 flex items-center justify-center relative">
               <svg className="absolute inset-0 w-full h-full -rotate-90">

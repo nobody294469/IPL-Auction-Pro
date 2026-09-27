@@ -414,7 +414,7 @@ export const FinishedScreen = ({ room, user, socket }: { room: AuctionRoom, user
                             {/* Purse Remaining */}
                             {room.auctionType !== 'draft' && (
                               <td className="py-3.5 px-3 text-right font-mono tabular-nums font-semibold text-zinc-200">
-                                â‚¹{team.budget.toFixed(2)} Cr
+                                ₹{team.budget.toFixed(2)} Cr
                               </td>
                             )}
 
@@ -627,7 +627,7 @@ export const FinishedScreen = ({ room, user, socket }: { room: AuctionRoom, user
                               </div>
                               <div className="text-right">
                                 <span className="font-mono tabular-nums text-xs font-semibold text-orange-400">
-                                  {room.auctionType === 'draft' ? 'Drafted' : `â‚¹${(player.soldPrice || player.basePrice)?.toFixed(2)} Cr`}
+                                  {room.auctionType === 'draft' ? 'Drafted' : `₹${(player.soldPrice || player.basePrice)?.toFixed(2)} Cr`}
                                 </span>
                               </div>
                             </div>
@@ -678,7 +678,7 @@ export const FinishedScreen = ({ room, user, socket }: { room: AuctionRoom, user
                               </div>
                               <div className="text-right">
                                 <span className="font-mono tabular-nums text-xs font-semibold text-orange-400">
-                                  {room.auctionType === 'draft' ? 'Drafted' : `â‚¹${(player.soldPrice || player.basePrice)?.toFixed(2)} Cr`}
+                                  {room.auctionType === 'draft' ? 'Drafted' : `₹${(player.soldPrice || player.basePrice)?.toFixed(2)} Cr`}
                                 </span>
                               </div>
                             </div>
@@ -730,7 +730,7 @@ export const FinishedScreen = ({ room, user, socket }: { room: AuctionRoom, user
                         <div className="flex items-center justify-center sm:justify-start gap-1">
                           <Coins className="text-amber-400" size={15} />
                           <p className="font-mono tabular-nums text-xl font-bold text-amber-400 tracking-tight">
-                            â‚¹{highlights.splurge.soldPrice?.toFixed(2)} Cr
+                            ₹{highlights.splurge.soldPrice?.toFixed(2)} Cr
                           </p>
                         </div>
                         <p className="text-xs text-zinc-400">
@@ -770,11 +770,11 @@ export const FinishedScreen = ({ room, user, socket }: { room: AuctionRoom, user
                         <div className="flex items-center justify-center sm:justify-start gap-1">
                           <Coins className="text-emerald-400" size={15} />
                           <p className="font-mono tabular-nums text-xl font-bold text-emerald-400 tracking-tight">
-                            â‚¹{highlights.steal.soldPrice?.toFixed(2)} Cr
+                            ₹{highlights.steal.soldPrice?.toFixed(2)} Cr
                           </p>
                         </div>
                         <p className="text-xs text-zinc-400">
-                          Base price: â‚¹{highlights.steal.basePrice} Cr Â· Role: {highlights.steal.role}
+                          Base price: ₹{highlights.steal.basePrice} Cr Â· Role: {highlights.steal.role}
                         </p>
                       </div>
                     </div>
@@ -825,7 +825,7 @@ export const FinishedScreen = ({ room, user, socket }: { room: AuctionRoom, user
                               <span className="text-xs font-semibold text-orange-400">{teamDetail?.shortName || buyer?.displayName}</span>
                             </div>
                             <div className="text-right shrink-0">
-                              <span className="font-mono tabular-nums text-xs font-semibold text-zinc-100">â‚¹{h.price.toFixed(2)} Cr</span>
+                              <span className="font-mono tabular-nums text-xs font-semibold text-zinc-100">₹{h.price.toFixed(2)} Cr</span>
                             </div>
                           </div>
                         </div>

@@ -143,7 +143,7 @@ export const Home = ({ user }: { user: FirebaseUser | null }) => {
     {
       step: '02',
       title: 'Purse limits spending',
-      description: 'Budgets (default â‚¹120 Cr, host-configurable) restrict player acquisition spending.'
+      description: 'Budgets (default ₹120 Cr, host-configurable) restrict player acquisition spending.'
     },
     {
       step: '03',
@@ -254,11 +254,11 @@ export const Home = ({ user }: { user: FirebaseUser | null }) => {
               {/* Stat 3: Base Team Purse */}
               <div className="bg-black/50 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 sm:p-4 flex items-center gap-3 shadow-lg">
                 <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 shrink-0">
-                  <span className="font-display font-bold text-sm text-orange-400">â‚¹</span>
+                  <span className="font-display font-bold text-sm text-orange-400">₹</span>
                 </div>
                 <div className="min-w-0">
                   <span className="block text-xl sm:text-2xl font-display font-bold text-white tracking-tight tabular-nums">
-                    â‚¹120 Cr
+                    ₹120 Cr
                   </span>
                   <span className="text-[11px] sm:text-xs text-zinc-400 block truncate">Base team purse</span>
                 </div>
@@ -522,7 +522,7 @@ export const Home = ({ user }: { user: FirebaseUser | null }) => {
                 {createAuctionType !== 'draft' ? (
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-left">
-                      <label className="block text-xs font-medium text-zinc-400 mb-2">Total purse (â‚¹ Cr)</label>
+                      <label className="block text-xs font-medium text-zinc-400 mb-2">Total purse (₹ Cr)</label>
                       <div className="flex items-center justify-between bg-zinc-900/80 border border-zinc-800 rounded-xl p-1.5">
                         <button
                           onClick={() => setCustomPurse(prev => Math.max(80, prev - 5))}

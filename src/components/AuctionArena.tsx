@@ -252,12 +252,12 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
     }
 
     socket.on('blind-bid-received', ({ amount }) => {
-      toast.success(`Secret bid of â‚¹${amount}Cr submitted!`);
+      toast.success(`Secret bid of ₹${amount}Cr submitted!`);
     });
 
     socket.on('blind-reveal', ({ winnerId, amount, bids }) => {
       const winner = roomRef.current.teams[winnerId];
-      toast.info(`Blind Auction Reveal: ${winner?.displayName || 'Someone'} wins with â‚¹${amount}Cr!`, {
+      toast.info(`Blind Auction Reveal: ${winner?.displayName || 'Someone'} wins with ₹${amount}Cr!`, {
         duration: 3000
       });
     });
@@ -324,7 +324,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
     if (room.auctionType === 'blind') {
       const amount = parseFloat(blindBidAmount);
       if (isNaN(amount) || amount < (currentPlayer?.basePrice || 0)) {
-        toast.error(`Minimum bid is â‚¹${currentPlayer?.basePrice || 0}Cr`);
+        toast.error(`Minimum bid is ₹${currentPlayer?.basePrice || 0}Cr`);
         return;
       }
       if (myProfile.budget < amount) {
@@ -456,7 +456,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                 </div>
                 <h2 className="text-2xl font-semibold font-display text-white">Right to Match?</h2>
                 <p className="text-zinc-400 text-sm leading-relaxed">
-                  {currentPlayer?.name} was previously with your team. Do you want to match the final bid of <span className="text-white font-semibold font-mono tabular-nums">â‚¹{room.rtmPending.amount.toFixed(2)} Cr</span>?
+                  {currentPlayer?.name} was previously with your team. Do you want to match the final bid of <span className="text-white font-semibold font-mono tabular-nums">₹{room.rtmPending.amount.toFixed(2)} Cr</span>?
                 </p>
               </div>
 
@@ -545,7 +545,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                     />
                     <span className="text-xl font-semibold font-display text-orange-400">{soldOverlay.teamName}</span>
                   </div>
-                  <span className="text-4xl sm:text-5xl font-bold font-mono tabular-nums text-white">â‚¹{soldOverlay.price.toFixed(2)} Cr</span>
+                  <span className="text-4xl sm:text-5xl font-bold font-mono tabular-nums text-white">₹{soldOverlay.price.toFixed(2)} Cr</span>
                 </motion.div>
               </div>
             </motion.div>
@@ -700,7 +700,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
           {room.auctionType !== 'draft' && (
             <div className="flex items-center gap-1.5 bg-zinc-900 px-2.5 py-1.5 rounded-lg border border-zinc-800">
               <Wallet className="text-orange-400" size={13} />
-              <span className="text-xs font-semibold font-mono tabular-nums text-zinc-200">â‚¹{myProfile.budget.toFixed(2)} Cr</span>
+              <span className="text-xs font-semibold font-mono tabular-nums text-zinc-200">₹{myProfile.budget.toFixed(2)} Cr</span>
             </div>
           )}
           <div className="flex items-center gap-1.5 bg-zinc-900 px-2.5 py-1.5 rounded-lg border border-zinc-800">
@@ -748,7 +748,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                     />
                     <div className="flex-1 min-w-0">
                       <span className="block text-xs font-medium text-zinc-200 truncate">{p.name}</span>
-                      <span className="text-[11px] text-zinc-400 font-mono tabular-nums">{p.role} â€¢ â‚¹{p.basePrice} Cr</span>
+                      <span className="text-[11px] text-zinc-400 font-mono tabular-nums">{p.role} ”¢ ₹{p.basePrice} Cr</span>
                     </div>
                   </div>
                 )) : (
@@ -789,7 +789,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
 
                       <div className="flex flex-col items-center justify-center min-w-[65px] relative">
                         <span className="text-xs font-semibold font-mono tabular-nums text-orange-400 mb-0.5 whitespace-nowrap">
-                          {room.auctionType === 'draft' ? 'Drafted' : `â‚¹${item.price?.toFixed(2)} Cr`}
+                          {room.auctionType === 'draft' ? 'Drafted' : `₹${item.price?.toFixed(2)} Cr`}
                         </span>
                         <div className="flex items-center w-full">
                           <div className="h-px flex-1 bg-zinc-700" />
@@ -1017,8 +1017,8 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                             <span>{player.country}</span>
                             {room.auctionType !== 'draft' && (
                               <>
-                                <span>â€¢</span>
-                                <span className="font-mono tabular-nums">â‚¹{player.basePrice} Cr</span>
+                                <span>”¢</span>
+                                <span className="font-mono tabular-nums">₹{player.basePrice} Cr</span>
                               </>
                             )}
                           </div>
@@ -1113,7 +1113,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                     <div className="flex items-center justify-center gap-2 text-zinc-400">
                       <div className="flex items-center gap-1.5 bg-zinc-900/80 px-3 py-1 rounded-full border border-zinc-800">
                         <Hash size={13} className="text-orange-400" />
-                        <span className="font-mono tabular-nums text-xs font-medium text-zinc-300">Base Price: â‚¹{currentPlayer.basePrice} Cr</span>
+                        <span className="font-mono tabular-nums text-xs font-medium text-zinc-300">Base Price: ₹{currentPlayer.basePrice} Cr</span>
                       </div>
                     </div>
                   </motion.div>
@@ -1136,7 +1136,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                         <div className="space-y-2">
                           {currentPlayerReport.facts.map((fact, idx) => (
                             <div key={idx} className="flex items-start gap-2 text-xs text-zinc-300 leading-relaxed">
-                              <span className="text-orange-400 select-none">â€¢</span>
+                              <span className="text-orange-400 select-none">”¢</span>
                               <p className="font-normal text-xs">{fact}</p>
                             </div>
                           ))}
@@ -1147,11 +1147,11 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                         <div className="flex items-center justify-between bg-zinc-950/60 px-3.5 py-2 rounded-xl border border-zinc-800/80">
                           <div className="flex flex-col">
                             <span className="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Expected Range</span>
-                            <span className="text-xs font-semibold font-mono tabular-nums text-zinc-200">â‚¹{currentPlayerReport.minPrice.toFixed(1)} - â‚¹{currentPlayerReport.maxPrice.toFixed(1)} Cr</span>
+                            <span className="text-xs font-semibold font-mono tabular-nums text-zinc-200">₹{currentPlayerReport.minPrice.toFixed(1)} - ₹{currentPlayerReport.maxPrice.toFixed(1)} Cr</span>
                           </div>
                           <div className="text-right">
                             <span className="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Base Price</span>
-                            <span className="text-xs font-semibold font-mono tabular-nums text-orange-400">â‚¹{currentPlayer.basePrice.toFixed(1)} Cr</span>
+                            <span className="text-xs font-semibold font-mono tabular-nums text-orange-400">₹{currentPlayer.basePrice.toFixed(1)} Cr</span>
                           </div>
                         </div>
                       </div>
@@ -1198,7 +1198,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                         <div className="flex items-center gap-2">
                           <XCircle size={14} className="text-red-400" />
                           <span className="text-zinc-200 font-semibold text-xs uppercase tracking-wider">
-                            Player Unsold â€” Next Lot Coming Up
+                            Player Unsold ”” Next Lot Coming Up
                           </span>
                         </div>
                       </div>
@@ -1288,7 +1288,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                           animate={{ y: 0, opacity: 1 }}
                           className="flex items-baseline gap-1"
                         >
-                          <span className="text-3xl font-bold font-mono tabular-nums text-white tracking-tight">â‚¹{(room.currentBid || 0).toFixed(2)}</span>
+                          <span className="text-3xl font-bold font-mono tabular-nums text-white tracking-tight">₹{(room.currentBid || 0).toFixed(2)}</span>
                           <span className="text-sm font-semibold font-mono text-zinc-400">Cr</span>
                         </motion.div>
                       </div>
@@ -1323,7 +1323,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                             step="0.05"
                             value={blindBidAmount}
                             onChange={(e) => setBlindBidAmount(e.target.value)}
-                            placeholder={`Min bid â‚¹${currentPlayer?.basePrice || 0}Cr`}
+                            placeholder={`Min bid ₹${currentPlayer?.basePrice || 0}Cr`}
                             className="w-full h-12 bg-zinc-950 border border-zinc-800 rounded-xl px-4 font-mono tabular-nums text-sm text-white focus:outline-none focus:border-orange-500 transition-colors placeholder:text-zinc-600"
                           />
                           <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-mono text-zinc-500">Cr</div>
@@ -1348,7 +1348,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                         }`}
                       >
                         <Gavel size={18} />
-                        {room.isPaused ? 'Auction Paused' : room.currentBidderId === user.uid ? 'Leading Bid' : `Bid â‚¹${nextBidAmount.toFixed(2)} Cr`}
+                        {room.isPaused ? 'Auction Paused' : room.currentBidderId === user.uid ? 'Leading Bid' : `Bid ₹${nextBidAmount.toFixed(2)} Cr`}
                       </button>
                     )}
                   </div>
@@ -1390,7 +1390,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                     </div>
                     {room.auctionType !== 'draft' && (
                       <div className="text-right flex flex-col items-end">
-                        <span className="block text-xs font-semibold font-mono tabular-nums text-zinc-200">â‚¹{t.budget.toFixed(1)} Cr</span>
+                        <span className="block text-xs font-semibold font-mono tabular-nums text-zinc-200">₹{t.budget.toFixed(1)} Cr</span>
                         <div className="flex items-center gap-1.5">
                           <span className="text-[10px] text-zinc-500 uppercase">Budget</span>
                           {room.auctionType === 'mega' && t.rtmCards > 0 && (
@@ -1443,7 +1443,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                   <div key={p.id} className="flex items-center justify-between text-xs p-2 bg-zinc-900/60 rounded-lg border border-zinc-800/80">
                     <span className="truncate max-w-[120px] font-medium text-zinc-300">{p.name}</span>
                     {room.auctionType !== 'draft' ? (
-                      <span className="font-semibold font-mono tabular-nums text-orange-400">â‚¹{p.soldPrice?.toFixed(2)} Cr</span>
+                      <span className="font-semibold font-mono tabular-nums text-orange-400">₹{p.soldPrice?.toFixed(2)} Cr</span>
                     ) : (
                       <span className="text-[10px] font-medium text-zinc-400 uppercase">Drafted</span>
                     )}
@@ -1504,7 +1504,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                             <img src={TEAMS.find(t => t.id === bid.teamId)?.logo || `https://api.dicebear.com/7.x/initials/svg?seed=${bid.teamName}`} className="w-5 h-5 object-contain" alt="" />
                             <span className="text-xs font-medium text-zinc-200 truncate">{bid.teamName}</span>
                           </div>
-                          <span className="text-xs font-semibold font-mono tabular-nums text-orange-400">â‚¹{bid.amount.toFixed(2)} Cr</span>
+                          <span className="text-xs font-semibold font-mono tabular-nums text-orange-400">₹{bid.amount.toFixed(2)} Cr</span>
                         </motion.div>
                       ))}
                     </AnimatePresence>
@@ -1585,7 +1585,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                           <h3 className="text-base font-semibold font-display text-white">{teamData?.name}</h3>
                           <div className="flex items-center gap-2 mt-1">
                             {room.auctionType !== 'draft' && (
-                              <span className="text-xs font-semibold font-mono tabular-nums text-orange-400">â‚¹{t.budget.toFixed(2)} Cr</span>
+                              <span className="text-xs font-semibold font-mono tabular-nums text-orange-400">₹{t.budget.toFixed(2)} Cr</span>
                             )}
                             <span className="text-xs text-zinc-400 font-mono tabular-nums">{t.squad.length}/25 Players</span>
                           </div>
@@ -1609,7 +1609,7 @@ export const AuctionArena = ({ user, room, socket }: { user: FirebaseUser, room:
                               </div>
                             </div>
                             {room.auctionType !== 'draft' ? (
-                              <span className="text-xs font-semibold font-mono tabular-nums text-orange-400">â‚¹{player.soldPrice?.toFixed(2)} Cr</span>
+                              <span className="text-xs font-semibold font-mono tabular-nums text-orange-400">₹{player.soldPrice?.toFixed(2)} Cr</span>
                             ) : (
                               <span className="text-[10px] font-medium text-zinc-400 uppercase">Drafted</span>
                             )}

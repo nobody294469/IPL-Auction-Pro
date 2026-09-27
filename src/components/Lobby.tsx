@@ -420,7 +420,7 @@ export const Lobby = ({ user, room, socket }: { user: FirebaseUser, room: Auctio
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-xs font-medium text-zinc-400 block">Total team purse</span>
-                      <span className="text-lg font-semibold font-mono tabular-nums text-white">â‚¹{room.purse} Cr</span>
+                      <span className="text-lg font-semibold font-mono tabular-nums text-white">₹{room.purse} Cr</span>
                     </div>
                     {isHost && (
                       <div className="flex items-center gap-1 bg-zinc-950 p-1 rounded-lg border border-zinc-800">

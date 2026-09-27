@@ -133,7 +133,7 @@ export const getTacticalAdvice = async (player: any, team: any) => {
     const prompt = `You are a professional cricket scout and auction strategist.
     Current Player up for auction: ${player?.name || 'Unknown'} (${player?.role || 'Player'}).
     Manager's current squad: ${squadSummary || "Empty"}.
-    Manager's remaining budget: â‚¹${budget} Cr.
+    Manager's remaining budget: ₹${budget} Cr.
 
     Give a one-sentence tactical advice on whether they should buy this player or save their money.
     Consider:
