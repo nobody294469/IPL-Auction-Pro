@@ -85,6 +85,37 @@ describe("Input Validation & Rate Limiting Test Suite", () => {
     });
   }
 
+  function waitForErrorMessage(
+    socket: ClientSocketType,
+    predicate?: RegExp | ((msg: string) => boolean),
+    timeoutMs = 4000
+  ): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        socket.off("error-message", handler);
+        reject(new Error("Timeout waiting for matching error-message event"));
+      }, timeoutMs);
+
+      const handler = (err: { message?: string } | string) => {
+        const msg = typeof err === "string" ? err : err?.message || "";
+        const matches =
+          !predicate
+            ? true
+            : predicate instanceof RegExp
+            ? predicate.test(msg)
+            : predicate(msg);
+
+        if (matches) {
+          clearTimeout(timer);
+          socket.off("error-message", handler);
+          resolve(msg);
+        }
+      };
+
+      socket.on("error-message", handler);
+    });
+  }
+
   // ==========================================================================
   // 1. UNIT VALIDATION SCHEMAS
   // ==========================================================================
@@ -324,15 +355,11 @@ describe("Input Validation & Rate Limiting Test Suite", () => {
       const initialBidder = room.currentBidderId;
       const initialBudget = serverInstance.rooms[roomId].teams["bid_test_peer"].budget;
 
-      let errorMessageReceived = "";
-      peerSocket.on("error-message", (err) => {
-        errorMessageReceived = err.message;
-      });
-
       // 1. Negative bid
+      const errPromise1 = waitForErrorMessage(peerSocket, /Invalid bid/i);
       peerSocket.emit("place-bid", { roomId, amount: -10 });
-      await new Promise((r) => setTimeout(r, 100));
-      assert.match(errorMessageReceived, /Invalid bid/i);
+      const err1 = await errPromise1;
+      assert.match(err1, /Invalid bid/i);
 
       // Verify state invariant: currentBid, bidder, and budget unchanged
       assert.strictEqual(serverInstance.rooms[roomId].currentBid, initialBid);
@@ -340,19 +367,19 @@ describe("Input Validation & Rate Limiting Test Suite", () => {
       assert.strictEqual(serverInstance.rooms[roomId].teams["bid_test_peer"].budget, initialBudget);
 
       // 2. String bid
-      errorMessageReceived = "";
+      const errPromise2 = waitForErrorMessage(peerSocket, /Invalid bid/i);
       peerSocket.emit("place-bid", { roomId, amount: "fifty" });
-      await new Promise((r) => setTimeout(r, 100));
-      assert.match(errorMessageReceived, /Invalid bid/i);
+      const err2 = await errPromise2;
+      assert.match(err2, /Invalid bid/i);
 
       assert.strictEqual(serverInstance.rooms[roomId].currentBid, initialBid);
       assert.strictEqual(serverInstance.rooms[roomId].currentBidderId, initialBidder);
 
       // 3. Bid lower than required minimum
-      errorMessageReceived = "";
+      const errPromise3 = waitForErrorMessage(peerSocket, /must exceed current bid/i);
       peerSocket.emit("place-bid", { roomId, amount: 0.1 });
-      await new Promise((r) => setTimeout(r, 100));
-      assert.match(errorMessageReceived, /must exceed current bid/i);
+      const err3 = await errPromise3;
+      assert.match(err3, /must exceed current bid/i);
 
       assert.strictEqual(serverInstance.rooms[roomId].currentBid, initialBid);
       assert.strictEqual(serverInstance.rooms[roomId].currentBidderId, initialBidder);
